@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Helper\Helper;
+use App\Mail\ContactEmail;
 use App\Models\Contact;
 use App\Models\Debt;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Illuminate\View\View;
 
@@ -38,7 +40,8 @@ class FrontController extends Controller
             'message.max'           => 'The message may not be greater than 1000 characters.'
         ]);
 
-        Contact::create($data);
+        $contact = Contact::create($data);
+        Mail::send(new ContactEmail($contact));
         return to_route('contact')->withSuccess('Enquery submitted successfully..!!');
     }
 
