@@ -2,8 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityController;
-use App\Http\Controllers\FireController;
 use App\Http\Controllers\Common\CommonController;
+use App\Http\Controllers\FrontController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +18,22 @@ use App\Http\Controllers\Common\CommonController;
 
 Route::view('/', 'front.home');
 Route::view('/home', 'front.home')->name('home');
+
+Route::view('/about-us', 'front.about-us')->name('about-us');
+Route::view('/terms-conditions', 'front.terms-conditions')->name('terms-conditions');
+Route::view('/privacy-policy', 'front.privacy-policy')->name('privacy-policy');
+Route::view('/refund-policy', 'front.refund-policy')->name('refund-policy');
+
 Route::view('/debt-settlement', 'front.debt-settlement')->name('debt-settlement');
+Route::post('/debt-settlement', [FrontController::class, 'debtRestructuring'])->name('debt-settlement');
+
 Route::view('/debt-restructuring', 'front.debt-restructuring')->name('debt-restructuring');
+Route::post('/debt-restructuring', [FrontController::class, 'debtRestructuring'])->name('debt-restructuring');
+
+Route::get('checkout/{slug}', [FrontController::class, 'checkout'])->name('checkout');
+
 Route::view('/contact', 'front.contact')->name('contact');
+Route::post('/contact', [FrontController::class, 'contactUs'])->name('contact');
 
 
 Route::get('test', [CommonController::class, 'test'])->name('test');

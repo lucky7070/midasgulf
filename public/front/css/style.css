@@ -59,9 +59,9 @@
 }
 
 /* ===== SECTIONS ===== */
-section {
+/* section {
     padding: 60px 20px;
-}
+} */
 
 .hero-section {
     background: #f7f7f7;
@@ -91,7 +91,7 @@ section {
     text-align: left;
     color: white;
 
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
+    /* text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4); */
 }
 
 .hero-text-overlay .main-title {
@@ -100,7 +100,7 @@ section {
     font-weight: 900;
     line-height: 1.1;
     margin-bottom: 10px;
-    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7);
+    /* text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.7); */
 
 }
 
@@ -110,7 +110,7 @@ section {
     font-weight: 700;
     margin-bottom: 20px;
     letter-spacing: 1px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); */
 }
 
 .hero-text-overlay .description {
@@ -401,17 +401,7 @@ section {
     gap: 1px
 }
 
-/* Copyright Bar */
-.copyright-bar {
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* background-color: #0b0f16; */
-    border-top: 1px solid #374151;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-}
+
 
 .copyright-text {
     max-width: 1280px;
@@ -442,13 +432,6 @@ section {
     padding: 0 20px;
 }
 
-.section-title {
-    font-size: 2.8em;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 15px;
-}
-
 .section-subtitle {
     font-size: 1.2em;
     color: #666;
@@ -457,17 +440,6 @@ section {
     /* Limit subtitle width for better readability */
     margin-left: auto;
     margin-right: auto;
-}
-
-/* Services Grid Layout */
-.services-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    /* Two equal columns */
-    gap: 30px;
-    /* Space between cards */
-    justify-content: center;
-    /* Center the grid if it doesn't take full width */
 }
 
 /* Individual Service Card Styling */
@@ -516,21 +488,6 @@ section {
     margin-bottom: 15px;
 }
 
-.service-card p {
-    font-size: 1em;
-    line-height: 1.6;
-    color: #555;
-    margin-bottom: 25px;
-}
-
-/* List Styling (Bullet points) */
-.service-card ul {
-    list-style: none;
-    /* Remove default bullets */
-    padding: 0;
-    margin-bottom: 30px;
-}
-
 .service-card ul li {
     background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23ffc926"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>') no-repeat left center;
     /* Custom yellow checkmark SVG */
@@ -551,6 +508,7 @@ section {
 /* ======================================================= */
 /* 1. MODEL 
 /* ======================================================= */
+
 .modal {
     display: none;
     position: fixed;
@@ -579,14 +537,13 @@ section {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
     position: relative;
     transition: transform 0.3s ease-out;
-    /* border: 2px solid red; */
 
 }
 
 .modal-first {
     margin-top: 40px;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -623,7 +580,6 @@ section {
 }
 
 .modal-subtitle {
-    font-size: 1em;
     color: #666;
     margin-bottom: 20px;
 }
@@ -687,37 +643,37 @@ section {
 /* image */
 /* Personal/Business */
 .bg-personal {
-    background-image: url('images/card/Money.jpeg');
+    background-image: url('../images/card/Money.jpeg');
 }
 
 /* House */
 .bg-house {
-    background-image: url('images/card/pexels-photo-1396122.jpeg');
+    background-image: url('../images/card/pexels-photo-1396122.jpeg');
 }
 
 /* Car */
 .bg-car {
-    background-image: url('images/card/car.jpeg');
+    background-image: url('../images/card/car.jpeg');
 }
 
 /* Credit Card */
 .bg-credit {
-    background-image: url('images/card/credit-card.webp');
+    background-image: url('../images/card/credit-card.webp');
 }
 
 /* Landlords */
 .bg-landlords {
-    background-image: url('images/card/landrods.webp');
+    background-image: url('../images/card/landrods.webp');
 }
 
 /* Vendors */
 .bg-vendors {
-    background-image: url('images/card/Vendors.webp');
+    background-image: url('../images/card/Vendors.webp');
 }
 
 /* Supplier */
 .bg-supplier {
-    background-image: url('images/card/suplier.jpeg');
+    background-image: url('../images/card/suplier.jpeg');
 }
 
 .settlement-options {
@@ -870,9 +826,9 @@ section {
         font-size: 18px;
     }
 
-    section {
+    /* section {
         padding: 40px 15px;
-    }
+    } */
 }
 
 /* --- MEDIA QUERIES FOR RESPONSIVENESS --- */
@@ -993,9 +949,9 @@ section {
 }
 
 /* ===== SECTIONS ===== */
-section {
+/* section {
     padding: 60px 20px;
-}
+} */
 
 /* Card Section */
 .settlement-section {
@@ -1142,10 +1098,11 @@ h2 {
     margin-bottom: 15px;
 }
 
+/* 
 p {
     max-width: 700px;
     margin-top: 10px;
-}
+} */
 
 /* footer  */
 /* Main Footer Styling */
@@ -1324,47 +1281,14 @@ p {
 
 /* Copyright Bar */
 .copyright-bar {
-    height: 60px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 60px;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
     /* background-color: #0b0f16; */
     border-top: 1px solid #374151;
     padding-top: 1rem;
     padding-bottom: 1rem;
-}
-
-.copyright-text {
-    max-width: 1280px;
-    margin-left: auto;
-    margin-right: auto;
-    padding-left: 16px;
-    padding-right: 16px;
-    text-align: center;
-    font-size: 0.90rem;
-    color: #6b7280;
-}
-
-.copyright-text span {
-    font-weight: 500;
-    color: #9ca3af;
-}
-
-/* --- Our Services Section Styling --- */
-.our-services-section {
-    padding: 80px 0;
-    /* Space above and below the section */
-    background-color: #f8f8f8;
-    /* Light background as seen in images */
-    text-align: center;
-    /* Center align titles and grid */
-}
-
-.our-services-section .container {
-    max-width: 1200px;
-    /* Adjust as per your site's main container width */
-    margin: 0 auto;
-    padding: 0 20px;
 }
 
 .section-title {
@@ -1372,16 +1296,6 @@ p {
     font-weight: 700;
     color: #333;
     margin-bottom: 15px;
-}
-
-.section-subtitle {
-    font-size: 1.2em;
-    color: #666;
-    margin-bottom: 50px;
-    max-width: 700px;
-    /* Limit subtitle width for better readability */
-    margin-left: auto;
-    margin-right: auto;
 }
 
 /* Services Grid Layout */
@@ -1393,52 +1307,6 @@ p {
     /* Space between cards */
     justify-content: center;
     /* Center the grid if it doesn't take full width */
-}
-
-/* Individual Service Card Styling */
-.service-card {
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    /* Subtle shadow */
-    padding: 40px 30px;
-    text-align: left;
-    /* Content inside card is left-aligned */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.service-card:hover {
-    transform: translateY(-5px);
-    /* Slight lift on hover */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    /* Enhanced shadow on hover */
-}
-
-.card-icon {
-    width: 60px;
-    /* Icon container size */
-    height: 60px;
-    background-color: #fef4e3;
-    /* Light orange/yellow background for icon */
-    border-radius: 50%;
-    /* Make it round */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.card-icon img {
-    width: 30px;
-    /* Icon image size */
-    height: 30px;
-}
-
-.service-card h3 {
-    font-size: 1.8em;
-    font-weight: 600;
-    color: #333;
-    margin-bottom: 15px;
 }
 
 .service-card p {
@@ -1699,16 +1567,12 @@ p {
 @media (max-width: 768px) {
     .hero-text-overlay {
         top: 15%;
-        /* थोड़ा ऊपर खिसकाया */
         left: 5%;
-        /* किनारे के पास */
         max-width: 90%;
-        /* ज़्यादा जगह का उपयोग */
     }
 
     .hero-text-overlay .main-title {
         font-size: 3em;
-        /* साइज़ कम किया */
     }
 
     .hero-text-overlay .subtitle {

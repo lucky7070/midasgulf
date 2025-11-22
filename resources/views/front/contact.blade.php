@@ -38,17 +38,14 @@
             <div class="intro-block">
                 <h2>We are happy to discuss your inquiry and answer your questions</h2>
             </div>
-
             <div class="office-block">
                 <h3>Dubai Office</h3>
                 <p>Office 123, Deyaar Building, Al Barsha 1, <br>Behind Mall of the Emirates, Dubai U.A.E.</p>
             </div>
-
             <div class="office-block">
                 <h3>Sharjah Office</h3>
                 <p>F24, Sharjah Publishing City Free Zone, <br>Sharjah, United Arab Emirates</p>
             </div>
-
             <div class="contact-info-blocks">
                 <div class="info-block">
                     <h3>Email</h3>
@@ -65,7 +62,6 @@
                     <p>+971528867088</p>
                 </div>
             </div>
-
         </div>
 
         <div class="column-right yellow-background">
@@ -73,21 +69,98 @@
                 <h2>Let's Start <br>The Conversation.</h2>
                 <hr class="separator">
             </div>
-
-            <form class="contact-form">
+            <form class="contact-form" id="contact-form" method="POST" action="{{ request()->url() }}">
                 <div class="form-row">
-                    <input type="text" name="first-name" placeholder="First Name" required>
-                    <input type="text" name="last-name" placeholder="Last Name" required>
+                    <div class="w-50">
+                        @csrf
+                        <input type="text" name="first_name" placeholder="First Name" value="{{ old('first_name') }}">
+                        @error('first_name')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="w-50">
+                        <input type="text" name="last_name" placeholder="Last Name" value="{{ old('last_name') }}">
+                        @error('last_name')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
-
-                <input type="email" name="email" placeholder="Email" required>
-
-                <textarea name="message" placeholder="Message" rows="4"></textarea>
-
+                <div class="">
+                    <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                    @error('email')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="">
+                    <textarea name="message" placeholder="Message" rows="4">{{ old('email') }}</textarea>
+                    @error('message')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
                 <button type="submit" class="submit-btn">SUBMIT</button>
             </form>
         </div>
     </div>
 </section>
+@endsection
 
+@section('js')
+<script>
+    $(document).ready(function() {
+        $("#contact-form").validate({
+            errorClass: "error fs--1",
+            errorElement: "small",
+            rules: {
+                first_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50,
+                },
+                last_name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 50,
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    minlength: 2,
+                    maxlength: 50,
+                },
+                message: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 1000,
+                },
+            },
+            messages: {
+                first_name: {
+                    required: "Please enter first name",
+                    minlength: "First name must consist of at least 2 characters.",
+                    maxlength: "First name must not exceed characters limit 50.",
+                },
+                last_name: {
+                    required: "Please enter last name",
+                    minlength: "last name must consist of at least 2 characters.",
+                    maxlength: "last name must not exceed characters limit 50.",
+                },
+                email: {
+                    email: "Please enter a valid email address",
+                    required: "Please enter email",
+                    minlength: "Email must consist of at least 2 characters.",
+                    maxlength: "Email must not exceed characters limit 50.",
+                },
+                message: {
+                    required: "Please enter message",
+                    minlength: "Message must consist of at least 10 characters.",
+                    maxlength: "Message must not exceed characters limit 1000.",
+                },
+            },
+            errorPlacement: function(label, element) {
+                label.addClass('fs--1 text-danger');
+                label.insertAfter(element);
+            },
+        });
+    });
+</script>
 @endsection

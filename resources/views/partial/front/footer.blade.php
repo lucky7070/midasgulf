@@ -185,9 +185,77 @@
 
     <!-- Bottom Copyright Bar -->
     <div class="copyright-bar">
+        <div class="container">
+            <div class="d-flex flex-wrap justify-content-center justify-content-md-start gap-3 p-3">
+                <a style="font-size: 0.90rem; color: #6b7280;"
+                    class="text-gray text-decoration-none"
+                    href="{{ route('terms-conditions') }}"
+                    data-discover="true">Terms &amp; Conditions</a>
+                <a style="font-size: 0.90rem; color: #6b7280;"
+                    class="text-gray text-decoration-none"
+                    href="{{ route('refund-policy') }}"
+                    data-discover="true">Refund Policy</a>
+            </div>
+        </div>
         <div class="copyright-text">
-            © Copyright 2023 MIDAS GULF | All Rights Reserved. Developed By <span>JTITTLE INNOVATIONS PVT.
+            © Copyright {{ date('Y') }} MIDAS GULF | All Rights Reserved. Developed By <span>JTITTLE INNOVATIONS PVT.
                 LTD.</span>
         </div>
     </div>
 </footer>
+
+
+<div id="enquiryModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-first">
+            <span class="close-btn">&times;</span>
+            <h2 id="modal-service-title" class="modal-title"></h2>
+        </div>
+        <p id="modal-subtitle" class="modal-subtitle small"></p>
+        <div class="modal-last">
+            <form class="main-enquiry-form">
+                <input type="hidden" id="hidden-debt-type" name="debt_type">
+                <div class="selection-content">
+                    <div class="settlement-options">
+                        <div class="option-card option-card-settlement">
+                            <div>
+                                <div class="card-icon icon-settlement">
+                                    <!-- Document/File Icon SVG -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 14H8v-2h8v2zm0-4H8v-2h8v2zm-4-4V3.5L17.5 9H12z" />
+                                    </svg>
+                                </div>
+                                <h3>Debt Settlement</h3>
+                                <p class="service-desc" data-service="settlement">Negotiate housing loan settlements to
+                                    avoid foreclosure. Protect your home while
+                                    reducing outstanding mortgage debt.</p>
+                            </div>
+                            <a href="{{ route('debt-settlement') }}" class="Card-btn btn-settlement">Apply for
+                                Settlement</a>
+                        </div>
+
+                        <!-- Right Section: Debt Restructuring -->
+                        <div class="option-card option-card-restructuring">
+                            <div>
+                                <div class="card-icon icon-restructuring">
+                                    <!-- Refresh/Loop Icon SVG -->
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                        <path
+                                            d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
+                                    </svg>
+                                </div>
+                                <h3>Debt Restructuring</h3>
+                                <p class="service-desc" data-service="restructuring">Extend payment terms and reduce
+                                    monthly EMI on housing loans. Keep your property
+                                    while making payments affordable.</p>
+                            </div>
+                            <a href="{{ route('debt-restructuring') }}" class="Card-btn btn-restructuring">Apply
+                                for Restructuring</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
