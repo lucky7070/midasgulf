@@ -17,7 +17,7 @@
     background-color: #fff;
     padding: 30px 20px 40px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .back-to-services {
@@ -70,7 +70,7 @@
     background-color: #fff;
     padding: 30px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     margin-bottom: 30px;
 }
 
@@ -241,18 +241,17 @@
 
 .submit-icon {
     /* Using a down arrow unicode as a placeholder for the submit icon */
-    content: "\25BC"; 
+    content: "\25BC";
     margin-right: 10px;
     font-size: 1.2em;
 }
-
 
 /* --- Settlement Specific Styling Overrides --- */
 
 /* Ensures the icon background is used if needed */
 .settlement-icon {
     /* If you need a different background color for Settlement icon, define it here */
-    background-color: #fef4e3; 
+    background-color: #fef4e3;
 }
 
 /* --- Settlement Specific Fields Layout --- */
@@ -263,7 +262,7 @@
 /* Ensure attachment visibility logic uses the correct class */
 .corporate-file-settlement {
     /* This class will be hidden by JS if Individual is selected */
-    display: block; 
+    display: block;
 }
 
 /* --- Responsive Adjustments for both forms --- */
