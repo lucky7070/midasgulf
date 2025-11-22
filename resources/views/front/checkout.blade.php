@@ -92,10 +92,10 @@
                             <i class="bi bi-check-circle me-2"></i>
                             <span>Yes, Book Consultation</span>
                         </button>
-                        <button class="btn btn-secondary px-4 py-2 rounded-2 fw-semibold d-flex align-items-center">
+                        <a href="{{ route('home') }}" class="btn btn-secondary px-4 py-2 rounded-2 fw-semibold d-flex align-items-center">
                             <i class="bi bi-x me-2"></i>
                             <span>No, Continue Without</span>
-                        </button>
+                        </a>
                     </div>
                 </div>
             </div>
