@@ -67,12 +67,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="row py-3 rounded-3 mb-3" style="background-color: rgb(249,250,251);">
-                    <div class="col-12 mb-2">
-                        <h4 class="fw-normal">Creditor Details</h4>
-                    </div>
-                    <div class="col-lg-6 mb-2">
-                        <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
+                <div class="row py-3 rounded-3 mb-3"  id="creditor-fields-container" style="background-color: rgb(249,250,251);">
+                     <div class="col-12 mb-2" style="display: flex; justify-content: space-between; align-items: center;">
+                       <h4 class="fw-normal">Creditor Details</h4>
+                       <button type="button" id="add-creditor-btn" class="btn flex justify-content-center mt-3 col-form-label" style="background-color: #ffc107;" >Add Creditor</button>
+                      </div>
+                       @error('creditor.0.name')
+                         <small class="text-danger">{{ $message }}</small>
+                      @enderror
+                    <div class="col-lg-6 mb-2 creditor-fields"  data-index="0" >
+                        <div class="creditor-header" style="display: flex; justify-content: space-between; align-items: center;">
+                         <span>Creditor 1</span>  <!-- This text will change dynamically -->
+                        </div>
+                    <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
                         <input
                             type="text"
                             name="creditor[0][name]"
@@ -82,8 +89,8 @@
                         @error('creditor.0.name')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2">
+                       </div>
+                       <div class="col-lg-6 mb-2 creditor-fields"  >
                         <label class="form-label">Amount Outstanding (AED) <span class="text-danger">*</span></label>
                         <input
                             type="number"
@@ -95,7 +102,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Creditor Phone</label>
                         <input
                             type="tel"
@@ -107,7 +114,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Creditor Email</label>
                         <input
                             type="email"
@@ -119,7 +126,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Contact Person Name</label>
                         <input
                             type="text"
@@ -131,7 +138,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Date of Last Payment</label>
                         <input
                             type="date"
@@ -142,7 +149,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Current EMI Per Month (AED)</label>
                         <input
                             type="number"
@@ -154,7 +161,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Security Cheque Value (AED)</label>
                         <input
                             type="number"
@@ -166,7 +173,7 @@
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
                     </div>
-                    <div class="col-lg-6 mb-2">
+                    <div class="col-lg-6 mb-2 creditor-fields" >
                         <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
                         <select
                             name="creditor[0][type_of_debt]"
@@ -184,17 +191,24 @@
                         @enderror
                     </div>
                 </div>
-                <div class="section-group">
-                    <h4 class="fw-normal">Case Status</h4>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="active_criminal_case" value="1" @checked(old('active_criminal_case'))>
-                        Active Criminal Case
-                    </label>
-                    <label class="checkbox-label">
-                        <input type="checkbox" name="active_civil_case" value="1" @checked(old('active_civil_case'))>
-                        Active Civil Case
-                    </label>
-                </div>
+             <div class="section-group">
+               <h4 class="fw-normal">Case Status</h4>
+    
+                <label class="checkbox-label">
+                  <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
+                     Active Criminal Case
+                </label>
+    
+                <label class="checkbox-label">
+                  <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
+                   Active Civil Case
+                   </label>
+    
+                   <div id="case_details" style="display: none;">
+                    <label for="case_description">Case Details:</label>
+                     <textarea id="case_description" name="case_description" rows="4" placeholder="Enter case details here..."></textarea>
+                     </div>
+                    </div>
                 <div class="section-group personal-info">
                     <h4 class="fw-normal">Personal Information</h4>
                     <div class="row">
@@ -329,7 +343,71 @@
 @endsection
 
 @section('js')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+   $(document).ready(function() {
+    let creditorIndex = 1; 
+
+    $('#add-creditor-btn').click(function() {
+        let newCreditorFields = $('.creditor-fields').clone(); 
+
+          newCreditorFields.find('input, select').each(function() {
+            let nameAttr = $(this).attr('name');
+            if (nameAttr) {
+                let updatedName = nameAttr.replace(/\[0\]/, `[${creditorIndex}]`);
+                $(this).attr('name', updatedName);
+            }
+        });
+
+        newCreditorFields.find('input').val('');
+        newCreditorFields.find('select').val('');
+
+        newCreditorFields.find('.creditor-header span').text(`Creditor ${creditorIndex + 1}`);
+ 
+       let removeBtn = $('<button>')
+            .attr('type', 'button')
+            .addClass('remove-creditor-btn btn btn-danger btn-sm')
+            .text('Remove')
+            .css({
+                'position': 'absolute',
+                'top': '-10px',
+                'right': '18px',
+                'z-index': '10'
+            })
+            .click(function() {
+                newCreditorFields.remove(); 
+            });
+
+        newCreditorFields.find('.creditor-header').append(removeBtn);
+
+        $('#creditor-fields-container').append(newCreditorFields);
+
+        creditorIndex++;
+    });
+
+   $(document).on('click', '.remove-creditor-btn', function() {
+        $(this).closest('.creditor-fields-container').remove();  // Remove the block
+    });
+});
+
+
+//text area  visible 
+function toggleTextarea() {
+        const criminalChecked = document.getElementById('active_criminal_case').checked;
+        const civilChecked = document.getElementById('active_civil_case').checked;
+        
+        if (criminalChecked || civilChecked) {
+            document.getElementById('case_details').style.display = 'block';
+        } else {
+            document.getElementById('case_details').style.display = 'none';
+        }
+    }
+
+    document.getElementById('active_criminal_case').addEventListener('change', toggleTextarea);
+    document.getElementById('active_civil_case').addEventListener('change', toggleTextarea);
+
+    toggleTextarea();
+
     $(document).ready(function() {
         $(document).ready(function() {
             $('.main-debt-application-form').validate({
