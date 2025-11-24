@@ -59,14 +59,13 @@
                 </div>
 
                 <div class="row py-3 rounded-3 mb-3" id="creditor-fields-container" style="background-color: rgb(249,250,251);">
-                     <div class="col-12 mb-2" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="col-12 mb-2" style="display: flex; justify-content: space-between; align-items: center;">
                         <h4 class="fw-normal">Creditor Details</h4>
-                       <button type="button" id="add-creditor-btn" class="btn flex justify-content-center mt-3 col-form-label" style="background-color: #ffc107;" >Add Creditor</button>
-
+                        <button type="button" id="add-creditor-btn" class="btn flex justify-content-center mt-3 col-form-label" style="background-color: #ffc107;">Add Creditor</button>
                     </div>
                     <div class="col-lg-6 mb-2 creditor-fields">
                         <div class="creditor-header" style="display: flex; justify-content: space-between; align-items: center;">
-                         <span>Creditor 1</span>  <!-- This text will change dynamically -->
+                            <span>Creditor 1</span> <!-- This text will change dynamically -->
                         </div>
                         <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
                         <input
@@ -180,242 +179,226 @@
                         @enderror
                     </div>
                 </div>
-<div class="row py-3 rounded-3 mb-3" style="background-color: rgb(249,250,251);">
-    <!-- Current EMI per month -->
-    <div class="col-lg-6 mb-2">
-        <label class="form-label">Current EMI Per Month (AED)</label>
-        <input
-            type="number"
-            id="currentEmi"
-            class="form-control"
-            placeholder="100000"
-            value="100000" /> 
-         </div>
-     <div class="col-lg-6 mb-2">
-     </div>
-         <h6 style="margin-top: 10px">What Monthly EMI Can You Afford? (AED)</h6>
-  <div class="col-lg-12 mb-2" style="background-color: rgb(239 246 255);">
-    <div class="row">
-        <p>Please provide a comfortable range that you can pay each month</p>
-        <div class="col-lg-6 mb-2">
-            <label class="form-label">Minimum Amount</label>
-            <input
-                type="text"
-                class="form-control"
-                value=""
-            />
-        </div>
 
-        <div class="col-lg-6 mb-2">
-            <label class="form-label">Maximum Amount</label>
-            <input
-                type="text"
-                class="form-control"
-                value=""
-            />
-        </div>
-         <div class="col-lg-12 mb-2">
-        <label class="form-label">Current EMI</label>
-        <p id="currentEmiDisplay" class="form-control-static">Current EMI: AED 100,000 (Potential savings up to AED 50,000/month)</p>
-    </div>
-    </div> 
-</div>
+                <div class="row py-3 rounded-3 mb-3" style="background-color: rgb(249,250,251);">
+                    <!-- Current EMI per month -->
+                    <div class="col-lg-6 mb-2">
+                        <label class="form-label">Current EMI Per Month (AED)</label>
+                        <input
+                            type="number"
+                            id="currentEmi"
+                            class="form-control"
+                            placeholder="100000"
+                            value="100000" />
+                    </div>
+                    <div class="col-lg-6 mb-2">
+                    </div>
+                    <h6 style="margin-top: 10px">What Monthly EMI Can You Afford? (AED)</h6>
+                    <div class="col-lg-12 mb-2" style="background-color: rgb(239 246 255);">
+                        <div class="row">
+                            <p>Please provide a comfortable range that you can pay each month</p>
+                            <div class="col-lg-6 mb-2">
+                                <label class="form-label">Minimum Amount</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="" />
+                            </div>
 
-
-   
-
-    <div class="col-lg-6 mb-2">
-        <label class="form-label">Security Cheque Value (AED)</label>
-        <input
-            type="number"
-            id="chequeValue"
-            class="form-control"
-            placeholder="0"
-            value="0" />
-    </div>
-
-    <div class="col-lg-6 mb-2">
-        <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
-        <select
-            name="debt_type"
-            class="form-control">
-            <option value="">Select debt type</option>
-            <option value="credit-card">Credit Card</option>
-            <option value="personal-loan">Personal Loan</option>
-            <option value="business-loan">Business Loan</option>
-            <option value="vehicle-loan">Vehicle Loan</option>
-            <option value="housing-loan">Housing Loan</option>
-            <option value="other">Other</option>
-        </select>
-    </div>
-</div>
-
-
-    <div class="col-lg-6 mb-2">
-        <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
-        <select
-            name="debt_type"
-            class="form-control">
-            <option value="">Select debt type</option>
-            <option value="credit-card">Credit Card</option>
-            <option value="personal-loan">Personal Loan</option>
-            <option value="business-loan">Business Loan</option>
-            <option value="vehicle-loan">Vehicle Loan</option>
-            <option value="housing-loan">Housing Loan</option>
-            <option value="other">Other</option>
-        </select>
-    </div>
-</div>
-
-
-              <div class="section-group">
-    <h4 class="fw-normal">Case Status</h4>
-    
-    <label class="checkbox-label">
-        <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
-        Active Criminal Case
-    </label>
-     <div id="criminal_case_details" style="display: none;">
-        <textarea id="criminal_case_description" style=" width:100%;" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here..."></textarea>
-    </div>
-    <label class="checkbox-label">
-        <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
-        Active Civil Case
-    </label>
-    <div id="civil_case_details" style="display: none;">
-        <textarea id="civil_case_description" style=" width:100%;" name="civil_case_description" rows="4" placeholder="Enter civil case details here..."></textarea>
-    </div>
-   
-    
-    
-</div>
-                <div class="section-group personal-info">
-                    <h4 class="fw-normal">Personal Information</h4>
-                    <div class="row">
-                        <div class="col-lg-6 mb-2">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="currently_in_country" value="1" @checked(old('currently_in_country', true))>
-                                Currently in the Country
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="valid_emirates_id" value="1" @checked(old('valid_emirates_id'))>
-                                Valid Emirates ID
-                            </label>
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="valid_passport" value="1" @checked(old('valid_passport'))>
-                                Valid Passport
-                            </label>
+                            <div class="col-lg-6 mb-2">
+                                <label class="form-label">Maximum Amount</label>
+                                <input
+                                    type="text"
+                                    class="form-control"
+                                    value="" />
+                            </div>
+                            <div class="col-lg-12 mb-2">
+                                <label class="form-label">Current EMI</label>
+                                <p id="currentEmiDisplay" class="form-control-static">Current EMI: AED 100,000 (Potential savings up to AED 50,000/month)</p>
+                            </div>
                         </div>
-                        <div class="col-lg-6 mb-2">
-                            <label for="" class="form-label">Client Status <span class="text-danger">*</span></label>
-                            <select name="client_status" id="settlement-client-status" class="form-select">
-                                <option value="">Select Client Status</option>
-                                <option value="individual" @selected(old('client_status')==='individual' )>Individual</option>
-                                <option value="corporate" @selected(old('client_status')==='corporate' )>Corporate</option>
-                            </select>
-                            @error('client_status')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="col-lg-6 mt-0 mt-lg-2">
-                            <label class="form-label" for="">Timeline to Close Issue <span class="text-danger">*</span></label>
-                            <select name="timelineRequirement" class="form-select">
-                                <option value="">Select timeline</option>
-                                <option value="less-than-6-months" @selected(old('timelineRequirement')==='less-than-6-months' )>Less than 6 months</option>
-                                <option value="6-12-months" @selected(old('timelineRequirement')==='6-12-months' )>More than 6 months but less than a year</option>
-                                <option value="flexible" @selected(old('timelineRequirement')==='flexible' )>Flexible</option>
-                            </select>
-                            @error('timelineRequirement')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                    </div>
+                    <div class="col-lg-6 mb-2">
+                        <label class="form-label">Security Cheque Value (AED)</label>
+                        <input type="number" id="chequeValue" class="form-control" placeholder="0" value="0" />
+                    </div>
+                    <div class="col-lg-6 mb-2">
+                        <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
+                        <select
+                            name="debt_type"
+                            class="form-control">
+                            <option value="">Select debt type</option>
+                            <option value="credit-card">Credit Card</option>
+                            <option value="personal-loan">Personal Loan</option>
+                            <option value="business-loan">Business Loan</option>
+                            <option value="vehicle-loan">Vehicle Loan</option>
+                            <option value="housing-loan">Housing Loan</option>
+                            <option value="other">Other</option>
+                        </select>
                     </div>
                 </div>
 
-                <div class="section-group personal-info">
-                    <h4 class="fw-normal">Required Attachments</h4>
-                    <div class="attachment-grid">
-                        <div class="">
-                            <div class="upload-box">
-                                <input type="file" id="settlement-upload-emirates-front" name="settlement_upload_emirates_front" accept="application/pdf,image/jpeg,image/png">
-                                <label class="fw-normal" for="settlement-upload-emirates-front">
-                                    <i class="upload-icon">
-                                        <i class="fa-duotone fa-cloud-arrow-up"></i>
-                                    </i>
-                                    Upload Emirates ID (Front)
-                                    <span>PDF, JPG, or PNG</span>
-                                </label>
-                            </div>
-                            @error('settlement_upload_emirates_front')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="">
-                            <div class="upload-box">
-                                <input type="file" id="settlement-upload-emirates-back" name="settlement_upload_emirates_back" accept="application/pdf,image/jpeg,image/png">
-                                <label class="fw-normal" for="settlement-upload-emirates-back">
-                                    <i class="upload-icon">
-                                        <i class="fa-duotone fa-cloud-arrow-up"></i>
-                                    </i>
-                                    Upload Emirates ID (Back)
-                                    <span>PDF, JPG, or PNG</span>
-                                </label>
-                            </div>
-                            @error('settlement_upload_emirates_back')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="">
-                            <div class="upload-box">
-                                <input type="file" id="settlement-upload-passport" name="settlement_upload_passport" accept="application/pdf,image/jpeg,image/png">
-                                <label class="fw-normal" for="settlement-upload-passport">
-                                    <i class="upload-icon">
-                                        <i class="fa-duotone fa-cloud-arrow-up"></i>
-                                    </i>
-                                    Upload Passport
-                                    <span>PDF, JPG, or PNG</span>
-                                </label>
-                            </div>
-                            @error('settlement_upload_passport')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+                <div class="col-lg-6 mb-2">
+                    <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
+                    <select
+                        name="debt_type"
+                        class="form-control">
+                        <option value="">Select debt type</option>
+                        <option value="credit-card">Credit Card</option>
+                        <option value="personal-loan">Personal Loan</option>
+                        <option value="business-loan">Business Loan</option>
+                        <option value="vehicle-loan">Vehicle Loan</option>
+                        <option value="housing-loan">Housing Loan</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+            </div>
 
-                        <div class="">
-                            <div class="upload-box">
-                                <input type="file" id="settlement-upload-license" name="settlement_upload_license" accept="application/pdf,image/jpeg,image/png">
-                                <label class="fw-normal" for="settlement-upload-license">
-                                    <i class="upload-icon">
-                                        <i class="fa-duotone fa-cloud-arrow-up"></i>
-                                    </i>
-                                    Upload License Page (If Corporate)
-                                    <span>PDF, JPG, or PNG</span>
-                                </label>
-                            </div>
-                            @error('settlement_upload_license')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
-                        <div class="">
-                            <div class="upload-box">
-                                <input type="file" id="settlement-upload-ejari" name="settlement_upload_ejari" accept="application/pdf,image/jpeg,image/png">
-                                <label class="fw-normal" for="settlement-upload-ejari">
-                                    <i class="upload-icon">
-                                        <i class="fa-duotone fa-cloud-arrow-up"></i>
-                                    </i>
-                                    Upload Ejari (If Corporate)
-                                    <span>PDF, JPG, or PNG</span>
-                                </label>
-                            </div>
-                            @error('settlement_upload_ejari')
-                            <small class="text-danger">{{ $message }}</small>
-                            @enderror
-                        </div>
+            <div class="section-group">
+                <h4 class="fw-normal">Case Status</h4>
+
+                <label class="checkbox-label">
+                    <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
+                    Active Criminal Case
+                </label>
+                <div id="criminal_case_details" style="display: none;">
+                    <textarea id="criminal_case_description" style=" width:100%;" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here..."></textarea>
+                </div>
+                <label class="checkbox-label">
+                    <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
+                    Active Civil Case
+                </label>
+                <div id="civil_case_details" style="display: none;">
+                    <textarea id="civil_case_description" style=" width:100%;" name="civil_case_description" rows="4" placeholder="Enter civil case details here..."></textarea>
+                </div>
+            </div>
+
+            <div class="section-group personal-info">
+                <h4 class="fw-normal">Personal Information</h4>
+                <div class="row">
+                    <div class="col-lg-6 mb-2">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="currently_in_country" value="1" @checked(old('currently_in_country', true))>
+                            Currently in the Country
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="valid_emirates_id" value="1" @checked(old('valid_emirates_id'))>
+                            Valid Emirates ID
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="valid_passport" value="1" @checked(old('valid_passport'))>
+                            Valid Passport
+                        </label>
+                    </div>
+                    <div class="col-lg-6 mb-2">
+                        <label for="" class="form-label">Client Status <span class="text-danger">*</span></label>
+                        <select name="client_status" id="settlement-client-status" class="form-select">
+                            <option value="">Select Client Status</option>
+                            <option value="individual" @selected(old('client_status')==='individual' )>Individual</option>
+                            <option value="corporate" @selected(old('client_status')==='corporate' )>Corporate</option>
+                        </select>
+                        @error('client_status')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="col-lg-6 mt-0 mt-lg-2">
+                        <label class="form-label" for="">Timeline to Close Issue <span class="text-danger">*</span></label>
+                        <select name="timelineRequirement" class="form-select">
+                            <option value="">Select timeline</option>
+                            <option value="less-than-6-months" @selected(old('timelineRequirement')==='less-than-6-months' )>Less than 6 months</option>
+                            <option value="6-12-months" @selected(old('timelineRequirement')==='6-12-months' )>More than 6 months but less than a year</option>
+                            <option value="flexible" @selected(old('timelineRequirement')==='flexible' )>Flexible</option>
+                        </select>
+                        @error('timelineRequirement')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
-                <div class="submit-area">
-                    <button type="submit" class="btn-submit-app"><i class="submit-icon"></i>Submit Application</button>
+            </div>
+
+            <div class="section-group personal-info">
+                <h4 class="fw-normal">Required Attachments</h4>
+                <div class="attachment-grid">
+                    <div class="">
+                        <div class="upload-box">
+                            <input type="file" id="settlement-upload-emirates-front" name="settlement_upload_emirates_front" accept="application/pdf,image/jpeg,image/png">
+                            <label class="fw-normal" for="settlement-upload-emirates-front">
+                                <i class="upload-icon">
+                                    <i class="fa-duotone fa-cloud-arrow-up"></i>
+                                </i>
+                                Upload Emirates ID (Front)
+                                <span>PDF, JPG, or PNG</span>
+                            </label>
+                        </div>
+                        @error('settlement_upload_emirates_front')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <div class="upload-box">
+                            <input type="file" id="settlement-upload-emirates-back" name="settlement_upload_emirates_back" accept="application/pdf,image/jpeg,image/png">
+                            <label class="fw-normal" for="settlement-upload-emirates-back">
+                                <i class="upload-icon">
+                                    <i class="fa-duotone fa-cloud-arrow-up"></i>
+                                </i>
+                                Upload Emirates ID (Back)
+                                <span>PDF, JPG, or PNG</span>
+                            </label>
+                        </div>
+                        @error('settlement_upload_emirates_back')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <div class="upload-box">
+                            <input type="file" id="settlement-upload-passport" name="settlement_upload_passport" accept="application/pdf,image/jpeg,image/png">
+                            <label class="fw-normal" for="settlement-upload-passport">
+                                <i class="upload-icon">
+                                    <i class="fa-duotone fa-cloud-arrow-up"></i>
+                                </i>
+                                Upload Passport
+                                <span>PDF, JPG, or PNG</span>
+                            </label>
+                        </div>
+                        @error('settlement_upload_passport')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+
+                    <div class="">
+                        <div class="upload-box">
+                            <input type="file" id="settlement-upload-license" name="settlement_upload_license" accept="application/pdf,image/jpeg,image/png">
+                            <label class="fw-normal" for="settlement-upload-license">
+                                <i class="upload-icon">
+                                    <i class="fa-duotone fa-cloud-arrow-up"></i>
+                                </i>
+                                Upload License Page (If Corporate)
+                                <span>PDF, JPG, or PNG</span>
+                            </label>
+                        </div>
+                        @error('settlement_upload_license')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                    <div class="">
+                        <div class="upload-box">
+                            <input type="file" id="settlement-upload-ejari" name="settlement_upload_ejari" accept="application/pdf,image/jpeg,image/png">
+                            <label class="fw-normal" for="settlement-upload-ejari">
+                                <i class="upload-icon">
+                                    <i class="fa-duotone fa-cloud-arrow-up"></i>
+                                </i>
+                                Upload Ejari (If Corporate)
+                                <span>PDF, JPG, or PNG</span>
+                            </label>
+                        </div>
+                        @error('settlement_upload_ejari')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
                 </div>
+            </div>
+            <div class="submit-area">
+                <button type="submit" class="btn-submit-app"><i class="submit-icon"></i>Submit Application</button>
             </div>
         </form>
     </div>
@@ -425,85 +408,85 @@
 @section('js')
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
- $(document).ready(function() {
-    let creditorIndex = 1; 
+    $(document).ready(function() {
+        let creditorIndex = 1;
 
-    $('#add-creditor-btn').click(function() {
-        let newCreditorFields = $('.creditor-fields').clone(); 
+        $('#add-creditor-btn').click(function() {
+            let newCreditorFields = $('.creditor-fields').clone();
 
-          newCreditorFields.find('input, select').each(function() {
-            let nameAttr = $(this).attr('name');
-            if (nameAttr) {
-                let updatedName = nameAttr.replace(/\[0\]/, `[${creditorIndex}]`);
-                $(this).attr('name', updatedName);
-            }
-        });
-
-        newCreditorFields.find('input').val('');
-        newCreditorFields.find('select').val('');
-
-        newCreditorFields.find('.creditor-header span').text(`Creditor ${creditorIndex + 1}`);
- 
-       let removeBtn = $('<button>')
-            .attr('type', 'button')
-            .addClass('remove-creditor-btn btn btn-danger btn-sm')
-            .text('Remove')
-            .css({
-                'position': 'absolute',
-                'top': '-10px',
-                'right': '18px',
-                'z-index': '10'
-            })
-            .click(function() {
-                newCreditorFields.remove(); 
+            newCreditorFields.find('input, select').each(function() {
+                let nameAttr = $(this).attr('name');
+                if (nameAttr) {
+                    let updatedName = nameAttr.replace(/\[0\]/, `[${creditorIndex}]`);
+                    $(this).attr('name', updatedName);
+                }
             });
 
-        newCreditorFields.find('.creditor-header').append(removeBtn);
+            newCreditorFields.find('input').val('');
+            newCreditorFields.find('select').val('');
 
-        $('#creditor-fields-container').append(newCreditorFields);
+            newCreditorFields.find('.creditor-header span').text(`Creditor ${creditorIndex + 1}`);
 
-        creditorIndex++;
+            let removeBtn = $('<button>')
+                .attr('type', 'button')
+                .addClass('remove-creditor-btn btn btn-danger btn-sm')
+                .text('Remove')
+                .css({
+                    'position': 'absolute',
+                    'top': '-10px',
+                    'right': '18px',
+                    'z-index': '10'
+                })
+                .click(function() {
+                    newCreditorFields.remove();
+                });
+
+            newCreditorFields.find('.creditor-header').append(removeBtn);
+
+            $('#creditor-fields-container').append(newCreditorFields);
+
+            creditorIndex++;
+        });
+
+        $(document).on('click', '.remove-creditor-btn', function() {
+            $(this).closest('.creditor-fields-container').remove(); // Remove the block
+        });
     });
 
-   $(document).on('click', '.remove-creditor-btn', function() {
-        $(this).closest('.creditor-fields-container').remove();  // Remove the block
-    });
-});
 
-
-// calucate the data 
-$(document).ready(function() {
-    updateSavings();
-
-    $('#affordableEmi').on('input', function() {
-        var affordableEmi = $(this).val();
-        $('#selectedEmi').text(affordableEmi.toLocaleString());
+    // calucate the data 
+    $(document).ready(function() {
         updateSavings();
+
+        $('#affordableEmi').on('input', function() {
+            var affordableEmi = $(this).val();
+            $('#selectedEmi').text(affordableEmi.toLocaleString());
+            updateSavings();
+        });
+
+        function updateSavings() {
+            var currentEmi = parseFloat($('#currentEmi').val());
+            var affordableEmi = parseFloat($('#affordableEmi').val());
+
+            var savings = currentEmi - affordableEmi;
+
+            $('#currentEmiDisplay').text(
+                "Current EMI: AED " + currentEmi.toLocaleString() +
+                " (Potential savings up to AED " + savings.toLocaleString() + "/month)"
+            );
+        }
+
+        $('#currentEmi').on('input', function() {
+            updateSavings();
+        });
     });
 
-    function updateSavings() {
-        var currentEmi = parseFloat($('#currentEmi').val());
-        var affordableEmi = parseFloat($('#affordableEmi').val());
-        
-        var savings = currentEmi - affordableEmi;
 
-        $('#currentEmiDisplay').text(
-            "Current EMI: AED " + currentEmi.toLocaleString() + 
-            " (Potential savings up to AED " + savings.toLocaleString() + "/month)"
-        );
-    }
-
-    $('#currentEmi').on('input', function() {
-        updateSavings();
-    });
-});
-
-
-//text area  visible 
-function toggleTextareas() {
+    //text area  visible 
+    function toggleTextareas() {
         const criminalChecked = document.getElementById('active_criminal_case').checked;
         const civilChecked = document.getElementById('active_civil_case').checked;
-        
+
         if (criminalChecked) {
             document.getElementById('criminal_case_details').style.display = 'block';
         } else {

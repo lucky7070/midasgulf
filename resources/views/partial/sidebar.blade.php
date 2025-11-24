@@ -110,7 +110,7 @@
         </li>
         @endif
 
-        @if(Helper::userCan(101))
+        <!-- @if(Helper::userCan(101))
         <li class="menu @routeis('setting') active @endrouteis">
             <a href="#setting" data-bs-toggle="collapse" aria-expanded="{{ Helper::routeis('setting') }}"
                 class="dropdown-toggle">
@@ -148,7 +148,7 @@
                     <span>Server Control Panel</span>
                 </div>
             </a>
-        </li>
-        @endif
+        </li> 
+        @endif -->
     </ul>
 </nav>
