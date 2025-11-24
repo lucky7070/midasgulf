@@ -35,6 +35,31 @@
         </li>
         @endif
 
+         <li class="menu">
+            <a href="{{route('report.contact')}}" class="dropdown-toggle">
+                <div class="">
+                    <i class="fa-duotone fa-list"></i>
+                    <span>Contact Us</span>
+                </div>
+            </a>
+        </li>
+         <li class="menu">
+            <a href="{{route('report.debt-settlement')}}" class="dropdown-toggle">
+                <div class="">
+                    <i class="fa-duotone fa-list"></i>
+                    <span>Debt Settlement</span>
+                </div>
+            </a>
+        </li>
+         <li class="menu">
+            <a href="{{route('report.debt-restructuring')}}" class="dropdown-toggle">
+                <div class="">
+                    <i class="fa-duotone fa-list"></i>
+                    <span>Debt Restructuring</span>
+                </div>
+            </a>
+        </li>
+
         @if(Helper::userCan([104]))
         <li class="menu @routeis('sliders,testimonials,cms,faq,enquiries,admin-banners') active @endrouteis">
             <a href="#static_content" data-bs-toggle="collapse"

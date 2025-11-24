@@ -29,15 +29,6 @@
         <form class="main-debt-application-form" method="POST" action="{{ request()->url() }}" enctype="multipart/form-data">
             <div class="form-section-card">
                 <h3>Client Profile Information</h3>
-                @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-                @endif
                 <div class="section-group">
                     <h4 class="fw-normal">Your Information</h4>
                     <div class="row gap-2 gap-lg-0">

@@ -4,6 +4,9 @@ use App\Routes\Profile;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CmsController;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DebtRestructuringController;
+use App\Http\Controllers\DebtSettlementController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RolesController;
 use App\Http\Controllers\StateController;
@@ -73,6 +76,14 @@ Route::middleware(['auth', 'permission', 'authCheck', 'verified'])->group(functi
         Route::post('cms', 'slug')->name('cms.slug')->middleware('isAllow:104,can_edit');
         Route::post('cms/{id}', 'update')->name('cms.edit')->middleware('isAllow:104,can_edit');
         Route::delete('cms', 'delete')->name('cms')->middleware('isAllow:104,can_delete');
+    });
+
+    Route::name('report.')->group(function () {
+        Route::get('report/debt-settlement', [DebtSettlementController::class, 'index'])->name('debt-settlement');
+        Route::get('report/debt-settlement/{slug}', [DebtSettlementController::class, 'details'])->name('debt-settlement-details');
+        Route::get('report/debt-restructuring', [DebtRestructuringController::class, 'index'])->name('debt-restructuring');
+        Route::get('report/debt-restructuring/{slug}', [DebtRestructuringController::class, 'details'])->name('debt-restructuring-details');
+        Route::get('report/contact', [ContactController::class, 'index'])->name('contact');
     });
 
     Route::any('setting/{id}', [SettingController::class, 'setting'])->name('setting')->middleware('isAllow:101,can_view');
