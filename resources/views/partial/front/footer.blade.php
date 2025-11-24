@@ -207,11 +207,12 @@
 
 <div id="enquiryModal" class="modal">
     <div class="modal-content">
+        <span class="close-btn" style="margin-top: 30px; margin-left: 23px;">&times;</span>
         <div class="modal-first">
-            <span class="close-btn">&times;</span>
+            
             <h2 id="modal-service-title" class="modal-title"></h2>
         </div>
-        <p id="modal-subtitle" class="modal-subtitle small"></p>
+        <p id="modal-subtitle" class="modal-subtitle small" style="padding-top: 18px;"></p>
         <div class="modal-last">
             <form class="main-enquiry-form">
                 <input type="hidden" id="hidden-debt-type" name="debt_type">
@@ -226,8 +227,8 @@
                                             d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8l-6-6zm2 14H8v-2h8v2zm0-4H8v-2h8v2zm-4-4V3.5L17.5 9H12z" />
                                     </svg>
                                 </div>
-                                <h3>Debt Settlement</h3>
-                                <p class="service-desc" data-service="settlement">Negotiate housing loan settlements to
+                                <h3 style="color: black; font-weight: bold;">Debt Settlement</h3>
+                                <p id="service-desc1" data-service="settlement">Negotiate housing loan settlements to
                                     avoid foreclosure. Protect your home while
                                     reducing outstanding mortgage debt.</p>
                             </div>
@@ -245,8 +246,8 @@
                                             d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
                                     </svg>
                                 </div>
-                                <h3>Debt Restructuring</h3>
-                                <p class="service-desc" data-service="restructuring">Extend payment terms and reduce
+                                <h3 style="color: black; font-weight: bold;">Debt Restructuring</h3>
+                                <p id="service-desc2" data-service="restructuring">Extend payment terms and reduce
                                     monthly EMI on housing loans. Keep your property
                                     while making payments affordable.</p>
                             </div>

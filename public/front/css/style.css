@@ -579,9 +579,9 @@
 } */
 .modal-title {
     position: absolute;
-    bottom: 410px;
+    bottom: 420px;
     /* Distance from bottom */
-    left: 34px;
+    left: 50px;
     /* Distance from left */
     font-size: 1.8em;
     font-weight: 700;
@@ -648,6 +648,32 @@
 .main-enquiry-form .btn-submit-app:hover {
     background-color: #b8860b;
 }
+#modal-subtitle {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+    padding-top: 18px;
+    line-height: 1.5;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    color: #6c757d;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+.small {
+    font-size: 0.875rem;
+    color: #999;
+}
+
+/* Add responsiveness if needed */
+@media (max-width: 576px) {
+    #modal-subtitle {
+        font-size: 12px;
+    }
+}
 
 /* image */
 /* Personal/Business */
@@ -696,7 +722,7 @@
 .option-card {
     flex: 1;
     /* Equal width for both */
-    padding: 20px;
+    padding: 16px;
     background: #f8f8f8;
     border-radius: 8px;
     border: 1px solid #ddd;
