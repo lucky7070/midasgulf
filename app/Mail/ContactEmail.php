@@ -39,6 +39,6 @@ class ContactEmail extends Mailable
 
     public function build()
     {
-        return $this->to('luckysolanki.adiyogi@gmail.com')->bcc('jangid.sanjay04@gmail.com')->subject('Lead From Midasgulf'); // advocate@midasgulf.com
+        return $this->to('md@midasgulf.com')->bcc('jangid.sanjay04@gmail.com')->subject('Lead From Midasgulf'); // advocate@midasgulf.com
     }
 }

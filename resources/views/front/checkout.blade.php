@@ -45,28 +45,32 @@
                         @foreach((isset($data['creditor']) ? $data['creditor'] : 0) as $key => $row)
                         <div class="bg-white p-3 rounded border border-info border-opacity-25">
                             <div class="d-flex align-items-center justify-content-between mb-2">
-                                <h4 class="h6 fw-semibold text-dark mb-0">Creditor {{ $key }}</h4>
-                                <span class="text-muted small">credit-card</span>
+                                <h4 class="h6 fw-semibold text-dark mb-0">Creditor {{ $key + 1 }}</h4>
+                                <span class="badge text-bg-primary">{{ $row['type_of_debt'] }}</span>
                             </div>
-                            <div class="row g-2 text-sm">
-                                <div class="col-md-6">
+                            <div class="row text-sm">
+                                <div class="col-md-6 mb-2">
                                     <span class="text-muted">Name:</span>
                                     <span class="fw-medium text-dark ms-2">{{ $row['name'] }}</span>
                                 </div>
-                                <div class="col-md-6">
-                                    <span class="text-muted">Outstanding:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ $row['name'] }}</span>
+                                <div class="col-md-6 mb-2">
+                                    <span class="text-muted">Phone:</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ?? 'N/A' }}</span>
                                 </div>
-                                <div class="col-md-6">
-                                    <span class="text-muted">EMI:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ $row['name'] }}</span>
+                                <div class="col-md-6 mb-2">
+                                    <span class="text-muted">Email:</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['email'] ?? 'N/A' }}</span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <span class="text-muted">Outstanding:</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ $row['amount_outstanding'] }}</span>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     </div>
 
-                    <div class="mt-4 pt-3 border-top border-info border-opacity-25">
+                    <!-- <div class="mt-4 pt-3 border-top border-info border-opacity-25">
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <div class="bg-warning bg-opacity-25 p-3 rounded-3">
@@ -81,7 +85,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="bg-white border border-2 border-warning p-5 rounded-3">

@@ -45,7 +45,7 @@ class FrontController extends Controller
             Mail::send(new ContactEmail($contact));
         } catch (\Throwable $th) {
         }
-        
+
         return to_route('contact')->withSuccess('Enquery submitted successfully..!!');
     }
 
@@ -93,6 +93,8 @@ class FrontController extends Controller
             "phone"                             => ['required', 'string', 'min:8', 'max:12',],
             "active_criminal_case"              => ['boolean'],
             "active_civil_case"                 => ['boolean'],
+            "criminal_case_description"         => ['string', 'max:1000'],
+            "civil_case_description"            => ['string', 'max:1000'],
             "currently_in_country"              => ['boolean'],
             "valid_passport"                    => ['boolean'],
             "creditor"                          => ['required'],
@@ -102,6 +104,7 @@ class FrontController extends Controller
             "settlement_upload_emirates_back"   => ['file', 'mimetypes:image/jpeg,image/png,application/pdf'],
             "settlement_upload_passport"        => ['file', 'mimetypes:image/jpeg,image/png,application/pdf'],
             "settlement_upload_license"         => ['file', 'mimetypes:image/jpeg,image/png,application/pdf'],
+            "settlement_upload_ejari"           => ['file', 'mimetypes:image/jpeg,image/png,application/pdf'],
             'creditor'                          => ['required', 'array', 'min:1'],
             'creditor.*.name'                   => ['required', 'string', 'max:100'],
             'creditor.*.amount_outstanding'     => ['required', 'numeric', 'min:0'],
@@ -111,6 +114,9 @@ class FrontController extends Controller
             'creditor.*.last_payment'           => ['nullable', 'date', 'before_or_equal:today'],
             'creditor.*.emi_per_month'          => ['nullable', 'numeric', 'min:0'],
             'creditor.*.cheque_value'           => ['nullable', 'numeric', 'min:0'],
+            'creditor.*.minimum_amount'         => ['nullable', 'numeric', 'min:0'],
+            'creditor.*.maximum_amount'         => ['nullable', 'numeric', 'min:0'],
+            'creditor.*.security_cheque_value'  => ['nullable', 'numeric', 'min:0'],
             'creditor.*.type_of_debt'           => ['required', 'in:credit-card,personal-loan,business-loan,vehicle-loan,housing-loan,other'],
         ], $messages);
 

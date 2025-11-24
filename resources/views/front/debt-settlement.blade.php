@@ -28,6 +28,9 @@
         </div>
 
         <form class="main-debt-application-form" method="POST" action="{{ request()->url() }}" enctype="multipart/form-data">
+            @csrf
+            <input type="hidden" name="type" value="1">
+
             <div class="form-section-card">
                 <h3>Client Profile Information</h3>
                 <div class="section-group">
@@ -35,8 +38,6 @@
                     <div class="row gap-2 gap-lg-0">
                         <div class="col-md-4">
                             <label for="" class="form-label mb-1">Full Name <span class="text-danger">*</span></label>
-                            <input type="hidden" name="type" value="1">
-                            @csrf
                             <input type="text" name="name" placeholder="Your full name" class="form-control" value="{{ old('name') }}">
                             @error('name')
                             <small class="text-danger">{{ $message }}</small>
@@ -58,148 +59,256 @@
                         </div>
                     </div>
                 </div>
-                <div class="row py-3 rounded-3 mb-3" id="creditor-fields-container" style="background-color: rgb(249,250,251);">
-                    <div class="col-12 mb-2" style="display: flex; justify-content: space-between; align-items: center;">
-                        <h4 class="fw-normal">Creditor Details</h4>
-                        <button type="button" id="add-creditor-btn" class="btn flex justify-content-center mt-3 col-form-label" style="background-color: #ffc107;">Add Creditor</button>
+
+                <!-- Creditors Section -->
+                <div class="section-group">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="fw-normal mb-0">Creditor Details</h4>
+                        <button type="button" id="add-creditor-btn" class="btn btn-warning">
+                            <i class="fas fa-plus"></i> Add Creditor
+                        </button>
                     </div>
-                    @error('creditor.0.name')
-                    <small class="text-danger">{{ $message }}</small>
-                    @enderror
-                    <div class="col-lg-6 mb-2 creditor-fields" data-index="0">
-                        <div class="creditor-header" style="display: flex; justify-content: space-between; align-items: center;">
-                            <span>Creditor 1</span> <!-- This text will change dynamically -->
+
+                    <div id="creditors-container">
+                        <!-- Initial Creditor -->
+                        <div class="creditor-block mb-4 p-3 border rounded" data-index="0">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Creditor #1</h5>
+                                <button type="button" class="btn btn-danger btn-sm remove-creditor" {{ old('creditor') && count(old('creditor')) > 1 ? '' : 'disabled' }}>
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
+                                    <input type="text" name="creditor[0][name]" class="form-control" placeholder="Bank or creditor name" value="{{ old('creditor.0.name') }}">
+                                    @error("creditor.0.name")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Amount Outstanding (AED) <span class="text-danger">*</span></label>
+                                    <input type="number" name="creditor[0][amount_outstanding]" class="form-control" placeholder="0" value="{{ old('creditor.0.amount_outstanding') }}">
+                                    @error("creditor.0.amount_outstanding")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Creditor Phone</label>
+                                    <input type="tel" name="creditor[0][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="{{ old('creditor.0.phone') }}">
+                                    @error("creditor.0.phone")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Creditor Email</label>
+                                    <input type="email" name="creditor[0][email]" class="form-control" placeholder="email@example.com" value="{{ old('creditor.0.email') }}">
+                                    @error("creditor.0.email")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Contact Person Name</label>
+                                    <input type="text" name="creditor[0][person_name]" class="form-control" placeholder="Contact name" value="{{ old('creditor.0.person_name') }}">
+                                    @error("creditor.0.person_name")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Date of Last Payment</label>
+                                    <input type="date" name="creditor[0][last_payment]" class="form-control" value="{{ old('creditor.0.last_payment') }}">
+                                    @error("creditor.0.last_payment")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Current EMI Per Month (AED)</label>
+                                    <input type="number" name="creditor[0][emi_per_month]" class="form-control" placeholder="0" value="{{ old('creditor.0.emi_per_month') }}">
+                                    @error("creditor.0.emi_per_month")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Security Cheque Value (AED)</label>
+                                    <input type="number" name="creditor[0][cheque_value]" class="form-control" placeholder="0" value="{{ old('creditor.0.cheque_value') }}">
+                                    @error("creditor.0.cheque_value")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
+                                    <select name="creditor[0][type_of_debt]" class="form-control">
+                                        <option value="">Select debt type</option>
+                                        <option value="credit-card" {{ old('creditor.0.type_of_debt') == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
+                                        <option value="personal-loan" {{ old('creditor.0.type_of_debt') == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
+                                        <option value="business-loan" {{ old('creditor.0.type_of_debt') == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
+                                        <option value="vehicle-loan" {{ old('creditor.0.type_of_debt') == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
+                                        <option value="housing-loan" {{ old('creditor.0.type_of_debt') == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
+                                        <option value="other" {{ old('creditor.0.type_of_debt') == 'other' ? 'selected' : '' }}>Other</option>
+                                    </select>
+                                    @error("creditor.0.type_of_debt")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
                         </div>
-                        <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
-                        <input
-                            type="text"
-                            name="creditor[0][name]"
-                            class="form-control"
-                            placeholder="Bank or creditor name"
-                            value="{{ old('creditor.0.name', '') }}" />
-                        @error('creditor.0.name')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Amount Outstanding (AED) <span class="text-danger">*</span></label>
-                        <input
-                            type="number"
-                            name="creditor[0][amount_outstanding]"
-                            class="form-control"
-                            placeholder="0"
-                            value="{{ old('creditor.0.amount_outstanding', '') }}" />
-                        @error('creditor.0.amount_outstanding')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Creditor Phone</label>
-                        <input
-                            type="tel"
-                            name="creditor[0][phone]"
-                            class="form-control"
-                            placeholder="+971 XX XXX XXXX"
-                            value="{{ old('creditor.0.phone', '') }}" />
-                        @error('creditor.0.phone')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Creditor Email</label>
-                        <input
-                            type="email"
-                            name="creditor[0][email]"
-                            class="form-control"
-                            placeholder="email@example.com"
-                            value="{{ old('creditor.0.email', '') }}" />
-                        @error('creditor.0.email')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Contact Person Name</label>
-                        <input
-                            type="text"
-                            name="creditor[0][person_name]"
-                            class="form-control"
-                            placeholder="Contact name"
-                            value="{{ old('creditor.0.person_name', '') }}" />
-                        @error('creditor.0.person_name')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Date of Last Payment</label>
-                        <input
-                            type="date"
-                            name="creditor[0][last_payment]"
-                            class="form-control"
-                            value="{{ old('creditor.0.last_payment', '') }}" />
-                        @error('creditor.0.last_payment')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Current EMI Per Month (AED)</label>
-                        <input
-                            type="number"
-                            name="creditor[0][emi_per_month]"
-                            class="form-control"
-                            placeholder="0"
-                            value="{{ old('creditor.0.emi_per_month', '') }}" />
-                        @error('creditor.0.emi_per_month')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Security Cheque Value (AED)</label>
-                        <input
-                            type="number"
-                            name="creditor[0][cheque_value]"
-                            class="form-control"
-                            placeholder="0"
-                            value="{{ old('creditor.0.cheque_value', '') }}" />
-                        @error('creditor.0.cheque_value')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
-                    </div>
-                    <div class="col-lg-6 mb-2 creditor-fields">
-                        <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
-                        <select
-                            name="creditor[0][type_of_debt]"
-                            class="form-control">
-                            <option value="">Select debt type</option>
-                            <option value="credit-card" {{ old('creditor.0.type_of_debt') == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
-                            <option value="personal-loan" {{ old('creditor.0.type_of_debt') == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
-                            <option value="business-loan" {{ old('creditor.0.type_of_debt') == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
-                            <option value="vehicle-loan" {{ old('creditor.0.type_of_debt') == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
-                            <option value="housing-loan" {{ old('creditor.0.type_of_debt') == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
-                            <option value="other" {{ old('creditor.0.type_of_debt') == 'other' ? 'selected' : '' }}>Other</option>
-                        </select>
-                        @error('creditor.0.type_of_debt')
-                        <small class="text-danger">{{ $message }}</small>
-                        @enderror
+
+                        <!-- Additional creditors from old input (in case of validation errors) -->
+                        @if(old('creditor'))
+                        @foreach(old('creditor') as $index => $creditor)
+                        @if($index > 0)
+                        <div class="creditor-block mb-4 p-3 border rounded" data-index="{{ $index }}">
+                            <div class="d-flex justify-content-between align-items-center mb-3">
+                                <h5 class="mb-0">Creditor #{{ $index + 1 }}</h5>
+                                <button type="button" class="btn btn-danger btn-sm remove-creditor">
+                                    <i class="fas fa-trash"></i> Remove
+                                </button>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-6 mb-2 creditor-fields" data-index="0">
+                                    <div class="creditor-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Creditor 1</span>
+                                    </div>
+                                    <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
+                                    <input
+                                        type="text"
+                                        name="creditor[{{ $index }}][name]"
+                                        class="form-control"
+                                        placeholder="Bank or creditor name"
+                                        value="{{ $creditor['name'] ?? '' }}" />
+                                    @error("creditor.{$index}.name")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Amount Outstanding (AED) <span class="text-danger">*</span></label>
+                                    <input
+                                        type="number"
+                                        name="creditor[{{ $index }}][amount_outstanding]"
+                                        class="form-control"
+                                        placeholder="0"
+                                        value="{{ $creditor['amount_outstanding'] ?? '' }}" />
+                                    @error("creditor.{$index}.amount_outstanding")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Creditor Phone</label>
+                                    <input
+                                        type="tel"
+                                        name="creditor[{{ $index }}][phone]"
+                                        class="form-control"
+                                        placeholder="+971 XX XXX XXXX"
+                                        value="{{ $creditor['phone'] ?? '' }}" />
+                                    @error("creditor.{$index}.phone")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Creditor Email</label>
+                                    <input
+                                        type="email"
+                                        name="creditor[{{ $index }}][email]"
+                                        class="form-control"
+                                        placeholder="email@example.com"
+                                        value="{{ $creditor['email'] ?? '' }}" />
+                                    @error("creditor.{$index}.email")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Contact Person Name</label>
+                                    <input
+                                        type="text"
+                                        name="creditor[{{ $index }}][person_name]"
+                                        class="form-control"
+                                        placeholder="Contact name"
+                                        value="{{ $creditor['person_name'] ?? '' }}" />
+                                    @error("creditor.{$index}.person_name")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Date of Last Payment</label>
+                                    <input
+                                        type="date"
+                                        name="creditor[{{ $index }}][last_payment]"
+                                        class="form-control"
+                                        value="{{ $creditor['last_payment'] ?? '' }}" />
+                                    @error("creditor.{$index}.last_payment")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Current EMI Per Month (AED)</label>
+                                    <input
+                                        type="number"
+                                        name="creditor[{{ $index }}][emi_per_month]"
+                                        class="form-control"
+                                        placeholder="0"
+                                        value="{{ $creditor['emi_per_month'] ?? '' }}" />
+                                    @error("creditor.{$index}.emi_per_month")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Security Cheque Value (AED)</label>
+                                    <input
+                                        type="number"
+                                        name="creditor[{{ $index }}][cheque_value]"
+                                        class="form-control"
+                                        placeholder="0"
+                                        value="{{ $creditor['cheque_value'] ?? '' }}" />
+                                    @error("creditor.{$index}.cheque_value")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-lg-6 mb-2 creditor-fields">
+                                    <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
+                                    <select
+                                        name="creditor[{{ $index }}][type_of_debt]"
+                                        class="form-control">
+                                        <option value="">Select debt type</option>
+                                        <option value="credit-card" {{ old("creditor.$index.type_of_debt") == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
+                                        <option value="personal-loan" {{ old("creditor.$index.type_of_debt") == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
+                                        <option value="business-loan" {{ old("creditor.$index.type_of_debt") == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
+                                        <option value="vehicle-loan" {{ old("creditor.$index.type_of_debt") == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
+                                        <option value="housing-loan" {{ old("creditor.$index.type_of_debt") == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
+                                        <option value="other" {{ old("creditor.$index.type_of_debt") == 'other' ? 'selected' : '' }}>Other</option>
+                                    </select>
+                                    @error("creditor.{$index}.type_of_debt")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                        @endif
+                        @endforeach
+                        @endif
                     </div>
                 </div>
+
+                <!-- Rest of your form remains the same -->
                 <div class="section-group">
                     <h4 class="fw-normal">Case Status</h4>
-
                     <label class="checkbox-label">
                         <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
                         Active Criminal Case
                     </label>
-                    <div id="criminal_case_details" style="display: none;">
-                        <textarea id="criminal_case_description" style=" width:100%;" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here..."></textarea>
+                    <div id="criminal_case_details" style="display: none;" class="my-2">
+                        <textarea id="criminal_case_description" class="form-control" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here...">{{ old('criminal_case_description') }}</textarea>
                     </div>
                     <label class="checkbox-label">
                         <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
                         Active Civil Case
                     </label>
-                    <div id="civil_case_details" style="display: none;">
-                        <textarea id="civil_case_description" style=" width:100%;" name="civil_case_description" rows="4" placeholder="Enter civil case details here..."></textarea>
+                    <div id="civil_case_details" style="display: none;" class="my-2">
+                        <textarea id="civil_case_description" class="form-control" name="civil_case_description" rows="4" placeholder="Enter civil case details here...">{{ old('civil_case_description') }}</textarea>
                     </div>
                 </div>
+
                 <div class="section-group personal-info">
                     <h4 class="fw-normal">Personal Information</h4>
                     <div class="row">
@@ -334,348 +443,431 @@
 @endsection
 
 @section('js')
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        let creditorIndex = 1;
+        let creditorIndex = parseInt("{{ max(array_keys(old('creditor', [0]))) + 1 }}");
 
+        // Add new creditor
         $('#add-creditor-btn').click(function() {
-            let newCreditorFields = $('.creditor-fields').clone();
+            const newCreditorHtml = `
+                <div class="creditor-block mb-4 p-3 border rounded" data-index="${creditorIndex}">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5 class="mb-0">Creditor #${creditorIndex + 1}</h5>
+                        <button type="button" class="btn btn-danger btn-sm remove-creditor">
+                            <i class="fas fa-trash"></i> Remove
+                        </button>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
+                            <input type="text" name="creditor[${creditorIndex}][name]" class="form-control creditor-name" placeholder="Bank or creditor name" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Amount Outstanding (AED) <span class="text-danger">*</span></label>
+                            <input type="number" name="creditor[${creditorIndex}][amount_outstanding]" class="form-control creditor-amount" placeholder="0" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Creditor Phone</label>
+                            <input type="tel" name="creditor[${creditorIndex}][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Creditor Email</label>
+                            <input type="email" name="creditor[${creditorIndex}][email]" class="form-control" placeholder="email@example.com" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Contact Person Name</label>
+                            <input type="text" name="creditor[${creditorIndex}][person_name]" class="form-control" placeholder="Contact name" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Date of Last Payment</label>
+                            <input type="date" name="creditor[${creditorIndex}][last_payment]" class="form-control" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Current EMI Per Month (AED)</label>
+                            <input type="number" name="creditor[${creditorIndex}][emi_per_month]" class="form-control" placeholder="0" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Security Cheque Value (AED)</label>
+                            <input type="number" name="creditor[${creditorIndex}][cheque_value]" class="form-control" placeholder="0" value="">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
+                            <select name="creditor[${creditorIndex}][type_of_debt]" class="form-control creditor-type">
+                                <option value="">Select debt type</option>
+                                <option value="credit-card">Credit Card</option>
+                                <option value="personal-loan">Personal Loan</option>
+                                <option value="business-loan">Business Loan</option>
+                                <option value="vehicle-loan">Vehicle Loan</option>
+                                <option value="housing-loan">Housing Loan</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            `;
 
-            newCreditorFields.find('input, select').each(function() {
-                let nameAttr = $(this).attr('name');
-                if (nameAttr) {
-                    let updatedName = nameAttr.replace(/\[0\]/, `[${creditorIndex}]`);
-                    $(this).attr('name', updatedName);
-                }
-            });
+            $('#creditors-container').append(newCreditorHtml);
 
-            newCreditorFields.find('input').val('');
-            newCreditorFields.find('select').val('');
+            // Enable remove button for first creditor if this is the second one
+            if (creditorIndex === 1) {
+                $('.creditor-block[data-index="0"] .remove-creditor').prop('disabled', false);
+            }
 
-            newCreditorFields.find('.creditor-header span').text(`Creditor ${creditorIndex + 1}`);
-
-            let removeBtn = $('<button>')
-                .attr('type', 'button')
-                .addClass('remove-creditor-btn btn btn-danger btn-sm')
-                .text('Remove')
-                .css({
-                    'position': 'absolute',
-                    'top': '-10px',
-                    'right': '18px',
-                    'z-index': '10'
-                })
-                .click(function() {
-                    newCreditorFields.remove();
-                });
-
-            newCreditorFields.find('.creditor-header').append(removeBtn);
-
-            $('#creditor-fields-container').append(newCreditorFields);
+            // Add validation rules for the new creditor fields
+            addCreditorValidationRules(creditorIndex);
 
             creditorIndex++;
         });
 
-        $(document).on('click', '.remove-creditor-btn', function() {
-            $(this).closest('.creditor-fields-container').remove(); // Remove the block
+        // Remove creditor
+        $(document).on('click', '.remove-creditor', function() {
+            const creditorBlock = $(this).closest('.creditor-block');
+            const index = creditorBlock.data('index');
+
+            // Remove validation rules before removing the element
+            removeCreditorValidationRules(index);
+
+            creditorBlock.remove();
+
+            // Renumber remaining creditors
+            renumberCreditors();
+
+            // Disable remove button if only one creditor remains
+            if ($('.creditor-block').length === 1) {
+                $('.creditor-block .remove-creditor').prop('disabled', true);
+            }
         });
-    });
 
+        // Renumber creditors after removal
+        function renumberCreditors() {
+            let currentIndex = 0;
+            $('.creditor-block').each(function() {
+                const oldIndex = $(this).data('index');
+                $(this).attr('data-index', currentIndex);
+                $(this).find('h5').text(`Creditor #${currentIndex + 1}`);
 
-    //text area  visible 
-    function toggleTextareas() {
-        const criminalChecked = document.getElementById('active_criminal_case').checked;
-        const civilChecked = document.getElementById('active_civil_case').checked;
-
-        if (criminalChecked) {
-            document.getElementById('criminal_case_details').style.display = 'block';
-        } else {
-            document.getElementById('criminal_case_details').style.display = 'none';
-        }
-
-        if (civilChecked) {
-            document.getElementById('civil_case_details').style.display = 'block';
-        } else {
-            document.getElementById('civil_case_details').style.display = 'none';
-        }
-    }
-    document.getElementById('active_criminal_case').addEventListener('change', toggleTextareas);
-    document.getElementById('active_civil_case').addEventListener('change', toggleTextareas);
-
-
-    toggleTextareas();
-
-
-
-
-    $(document).ready(function() {
-        $(document).ready(function() {
-            $('.main-debt-application-form').validate({
-                rules: {
-                    name: {
-                        required: true,
-                        minlength: 2,
-                        maxlength: 100
-                    },
-                    email: {
-                        required: true,
-                        email: true,
-                        maxlength: 50
-                    },
-                    phone: {
-                        required: true,
-                        minlength: 8,
-                        maxlength: 12,
-                        digits: true
-                    },
-                    client_status: {
-                        required: true
-                    },
-                    timelineRequirement: {
-                        required: true
-                    },
-                    'creditor[0][name]': {
-                        required: true,
-                        maxlength: 100
-                    },
-                    'creditor[0][amount_outstanding]': {
-                        required: true,
-                        number: true,
-                        min: 0
-                    },
-                    'creditor[0][phone]': {
-                        maxlength: 20,
-                        digits: true
-                    },
-                    'creditor[0][email]': {
-                        email: true,
-                        maxlength: 255
-                    },
-                    'creditor[0][person_name]': {
-                        maxlength: 255
-                    },
-                    'creditor[0][last_payment]': {
-                        date: true,
-                        maxDate: new Date().toISOString().split('T')[0]
-                    },
-                    'creditor[0][emi_per_month]': {
-                        number: true,
-                        min: 0
-                    },
-                    'creditor[0][cheque_value]': {
-                        number: true,
-                        min: 0
-                    },
-                    'creditor[0][type_of_debt]': {
-                        required: true
-                    },
-                    settlement_upload_emirates_front: {
-                        accept: "image/jpeg,image/png,application/pdf"
-                    },
-                    settlement_upload_emirates_back: {
-                        accept: "image/jpeg,image/png,application/pdf"
-                    },
-                    settlement_upload_passport: {
-                        accept: "image/jpeg,image/png,application/pdf"
-                    },
-                    settlement_upload_license: {
-                        accept: "image/jpeg,image/png,application/pdf"
-                    },
-                    settlement_upload_ejari: {
-                        accept: "image/jpeg,image/png,application/pdf"
-                    }
-                },
-                messages: {
-                    name: {
-                        required: "Please enter your full name",
-                        minlength: "Name must be at least 2 characters long",
-                        maxlength: "Name cannot exceed 100 characters"
-                    },
-                    email: {
-                        required: "Please enter your email address",
-                        email: "Please enter a valid email address",
-                        maxlength: "Email cannot exceed 50 characters"
-                    },
-                    phone: {
-                        required: "Please enter your phone number",
-                        minlength: "Phone number must be at least 8 digits",
-                        maxlength: "Phone number cannot exceed 12 digits",
-                        digits: "Please enter only digits"
-                    },
-                    client_status: {
-                        required: "Please select client status"
-                    },
-                    timelineRequirement: {
-                        required: "Please select timeline requirement"
-                    },
-                    'creditor[0][name]': {
-                        required: "Creditor name is required",
-                        maxlength: "Creditor name cannot exceed 100 characters"
-                    },
-                    'creditor[0][amount_outstanding]': {
-                        required: "Amount outstanding is required",
-                        number: "Please enter a valid number",
-                        min: "Amount cannot be negative"
-                    },
-                    'creditor[0][phone]': {
-                        maxlength: "Phone number cannot exceed 20 digits",
-                        digits: "Please enter only digits"
-                    },
-                    'creditor[0][email]': {
-                        email: "Please enter a valid email address",
-                        maxlength: "Email cannot exceed 255 characters"
-                    },
-                    'creditor[0][person_name]': {
-                        maxlength: "Contact person name cannot exceed 255 characters"
-                    },
-                    'creditor[0][last_payment]': {
-                        date: "Please enter a valid date",
-                        maxDate: "Last payment date cannot be in the future"
-                    },
-                    'creditor[0][emi_per_month]': {
-                        number: "Please enter a valid number",
-                        min: "EMI cannot be negative"
-                    },
-                    'creditor[0][cheque_value]': {
-                        number: "Please enter a valid number",
-                        min: "Cheque value cannot be negative"
-                    },
-                    'creditor[0][type_of_debt]': {
-                        required: "Please select type of debt"
-                    },
-                    settlement_upload_emirates_front: {
-                        accept: "Please upload only JPEG, PNG, or PDF files"
-                    },
-                    settlement_upload_emirates_back: {
-                        accept: "Please upload only JPEG, PNG, or PDF files"
-                    },
-                    settlement_upload_passport: {
-                        accept: "Please upload only JPEG, PNG, or PDF files"
-                    },
-                    settlement_upload_license: {
-                        accept: "Please upload only JPEG, PNG, or PDF files"
-                    },
-                    settlement_upload_ejari: {
-                        accept: "Please upload only JPEG, PNG, or PDF files"
-                    }
-                },
-                errorElement: 'small',
-                errorClass: 'text-danger',
-                errorPlacement: function(error, element) {
-                    if (element.attr('name') === 'active_criminal_case' ||
-                        element.attr('name') === 'active_civil_case' ||
-                        element.attr('name') === 'currently_in_country' ||
-                        element.attr('name') === 'valid_passport') {
-                        error.insertAfter(element.closest('.checkbox-label'));
-                    } else if (element.attr('type') === 'file') {
-                        error.insertAfter(element.closest('.upload-box'));
-                    } else {
-                        error.insertAfter(element);
-                    }
-                },
-                highlight: function(element, errorClass, validClass) {
-                    $(element).addClass('is-invalid').removeClass('is-valid');
-                    $(element).closest('.form-control, .form-select').addClass('is-invalid');
-                },
-                unhighlight: function(element, errorClass, validClass) {
-                    $(element).removeClass('is-invalid').addClass('is-valid');
-                    $(element).closest('.form-control, .form-select').removeClass('is-invalid');
-                },
-                submitHandler: function(form) {
-
-                    $('.btn-submit-app').prop('disabled', true).html('<i class="submit-icon"></i>Submitting...');
-
-                    // Validate file sizes (optional additional validation)
-                    if (!validateFileSizes()) {
-                        $('.btn-submit-app').prop('disabled', false).html('<i class="submit-icon"></i>Submit Application');
-                        return false;
-                    }
-
-                    form.submit();
-                }
-            });
-
-            // Custom method for date validation
-            $.validator.addMethod("maxDate", function(value, element) {
-                if (this.optional(element)) {
-                    return true;
-                }
-                var selectedDate = new Date(value);
-                var today = new Date();
-                return selectedDate <= today;
-            }, "Date cannot be in the future");
-
-            // Custom method for file type validation
-            $.validator.addMethod("accept", function(value, element, param) {
-                if (this.optional(element)) {
-                    return true;
-                }
-                if (!value) return true; // No file selected is valid for optional fields
-
-                var extension = value.split('.').pop().toLowerCase();
-                var mimeType = $(element).prop('files')[0].type;
-
-                // Check if file type matches allowed types
-                return param.split(',').indexOf(mimeType) !== -1;
-            });
-
-            // File size validation function
-            function validateFileSizes() {
-                var maxSize = 5 * 1024 * 1024; // 5MB in bytes
-                var isValid = true;
-
-                $('input[type="file"]').each(function() {
-                    if (this.files && this.files[0]) {
-                        if (this.files[0].size > maxSize) {
-                            isValid = false;
-                            $(this).addClass('is-invalid');
-                            $(this).siblings('.text-danger').remove();
-                            $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
-                        }
-                    }
+                // Update all input names and validation rules
+                $(this).find('[name]').each(function() {
+                    const name = $(this).attr('name');
+                    const newName = name.replace(/creditor\[\d+\]/, `creditor[${currentIndex}]`);
+                    $(this).attr('name', newName);
                 });
 
-                return isValid;
+                // Update validation rules for this creditor
+                updateCreditorValidationRules(oldIndex, currentIndex);
+
+                currentIndex++;
+            });
+
+            creditorIndex = currentIndex;
+        }
+
+        // Add validation rules for a specific creditor index
+        function addCreditorValidationRules(index) {
+            const validator = $('.main-debt-application-form').validate();
+
+            // Creditor name
+            $(`input[name="creditor[${index}][name]"]`).rules('add', {
+                required: true,
+                maxlength: 100,
+                messages: {
+                    required: "Creditor name is required",
+                    maxlength: "Creditor name cannot exceed 100 characters"
+                }
+            });
+
+            // Amount outstanding
+            $(`input[name="creditor[${index}][amount_outstanding]"]`).rules('add', {
+                required: true,
+                number: true,
+                min: 0,
+                messages: {
+                    required: "Amount outstanding is required",
+                    number: "Please enter a valid number",
+                    min: "Amount cannot be negative"
+                }
+            });
+
+            // Creditor phone
+            $(`input[name="creditor[${index}][phone]"]`).rules('add', {
+                maxlength: 20,
+                digits: true,
+                messages: {
+                    maxlength: "Phone number cannot exceed 20 digits",
+                    digits: "Please enter only digits"
+                }
+            });
+
+            // Creditor email
+            $(`input[name="creditor[${index}][email]"]`).rules('add', {
+                email: true,
+                maxlength: 255,
+                messages: {
+                    email: "Please enter a valid email address",
+                    maxlength: "Email cannot exceed 255 characters"
+                }
+            });
+
+            // Contact person name
+            $(`input[name="creditor[${index}][person_name]"]`).rules('add', {
+                maxlength: 255,
+                messages: {
+                    maxlength: "Contact person name cannot exceed 255 characters"
+                }
+            });
+
+            // Last payment date
+            $(`input[name="creditor[${index}][last_payment]"]`).rules('add', {
+                date: true,
+                maxDate: new Date().toISOString().split('T')[0],
+                messages: {
+                    date: "Please enter a valid date",
+                    maxDate: "Last payment date cannot be in the future"
+                }
+            });
+
+            // EMI per month
+            $(`input[name="creditor[${index}][emi_per_month]"]`).rules('add', {
+                number: true,
+                min: 0,
+                messages: {
+                    number: "Please enter a valid number",
+                    min: "EMI cannot be negative"
+                }
+            });
+
+            // Cheque value
+            $(`input[name="creditor[${index}][cheque_value]"]`).rules('add', {
+                number: true,
+                min: 0,
+                messages: {
+                    number: "Please enter a valid number",
+                    min: "Cheque value cannot be negative"
+                }
+            });
+
+            // Type of debt
+            $(`select[name="creditor[${index}][type_of_debt]"]`).rules('add', {
+                required: true,
+                messages: {
+                    required: "Please select type of debt"
+                }
+            });
+        }
+
+        // Remove validation rules for a specific creditor index
+        function removeCreditorValidationRules(index) {
+            $(`input[name="creditor[${index}][name]"]`).rules('remove');
+            $(`input[name="creditor[${index}][amount_outstanding]"]`).rules('remove');
+            $(`input[name="creditor[${index}][phone]"]`).rules('remove');
+            $(`input[name="creditor[${index}][email]"]`).rules('remove');
+            $(`input[name="creditor[${index}][person_name]"]`).rules('remove');
+            $(`input[name="creditor[${index}][last_payment]"]`).rules('remove');
+            $(`input[name="creditor[${index}][emi_per_month]"]`).rules('remove');
+            $(`input[name="creditor[${index}][cheque_value]"]`).rules('remove');
+            $(`select[name="creditor[${index}][type_of_debt]"]`).rules('remove');
+        }
+
+        // Update validation rules when renumbering
+        function updateCreditorValidationRules(oldIndex, newIndex) {
+            removeCreditorValidationRules(oldIndex);
+            addCreditorValidationRules(newIndex);
+        }
+
+        // Case status textarea toggle
+        function toggleTextareas() {
+            const criminalChecked = $('#active_criminal_case').is(':checked');
+            const civilChecked = $('#active_civil_case').is(':checked');
+
+            $('#criminal_case_details').toggle(criminalChecked);
+            $('#civil_case_details').toggle(civilChecked);
+        }
+
+        $('#active_criminal_case, #active_civil_case').on('change', toggleTextareas);
+        toggleTextareas();
+
+        // jQuery Validation - Initialize with basic rules
+        $('.main-debt-application-form').validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 2,
+                    maxlength: 100
+                },
+                email: {
+                    required: true,
+                    email: true,
+                    maxlength: 50
+                },
+                phone: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 12,
+                    digits: true
+                },
+                client_status: {
+                    required: true
+                },
+                timelineRequirement: {
+                    required: true
+                },
+                settlement_upload_emirates_front: {
+                    accept: "image/jpeg,image/png,application/pdf"
+                },
+                settlement_upload_emirates_back: {
+                    accept: "image/jpeg,image/png,application/pdf"
+                },
+                settlement_upload_passport: {
+                    accept: "image/jpeg,image/png,application/pdf"
+                },
+                settlement_upload_license: {
+                    accept: "image/jpeg,image/png,application/pdf"
+                },
+                settlement_upload_ejari: {
+                    accept: "image/jpeg,image/png,application/pdf"
+                }
+            },
+            messages: {
+                name: {
+                    required: "Please enter your full name",
+                    minlength: "Name must be at least 2 characters long",
+                    maxlength: "Name cannot exceed 100 characters"
+                },
+                email: {
+                    required: "Please enter your email address",
+                    email: "Please enter a valid email address",
+                    maxlength: "Email cannot exceed 50 characters"
+                },
+                phone: {
+                    required: "Please enter your phone number",
+                    minlength: "Phone number must be at least 8 digits",
+                    maxlength: "Phone number cannot exceed 12 digits",
+                    digits: "Please enter only digits"
+                },
+                client_status: {
+                    required: "Please select client status"
+                },
+                timelineRequirement: {
+                    required: "Please select timeline requirement"
+                },
+                settlement_upload_emirates_front: {
+                    accept: "Please upload only JPEG, PNG, or PDF files"
+                },
+                settlement_upload_emirates_back: {
+                    accept: "Please upload only JPEG, PNG, or PDF files"
+                },
+                settlement_upload_passport: {
+                    accept: "Please upload only JPEG, PNG, or PDF files"
+                },
+                settlement_upload_license: {
+                    accept: "Please upload only JPEG, PNG, or PDF files"
+                },
+                settlement_upload_ejari: {
+                    accept: "Please upload only JPEG, PNG, or PDF files"
+                }
+            },
+            errorElement: 'small',
+            errorClass: 'text-danger',
+            errorPlacement: function(error, element) {
+                if (element.attr('name') === 'active_criminal_case' ||
+                    element.attr('name') === 'active_civil_case' ||
+                    element.attr('name') === 'currently_in_country' ||
+                    element.attr('name') === 'valid_passport') {
+                    error.insertAfter(element.closest('.checkbox-label'));
+                } else if (element.attr('type') === 'file') {
+                    error.insertAfter(element.closest('.upload-box'));
+                } else {
+                    error.insertAfter(element);
+                }
+            },
+            highlight: function(element, errorClass, validClass) {
+                $(element).addClass('is-invalid').removeClass('is-valid');
+                $(element).closest('.form-control, .form-select').addClass('is-invalid');
+            },
+            unhighlight: function(element, errorClass, validClass) {
+                $(element).removeClass('is-invalid').addClass('is-valid');
+                $(element).closest('.form-control, .form-select').removeClass('is-invalid');
+            },
+            submitHandler: function(form) {
+                $('.btn-submit-app').prop('disabled', true).html('<i class="submit-icon"></i>Submitting...');
+
+                // Validate file sizes (optional additional validation)
+                if (!validateFileSizes()) {
+                    $('.btn-submit-app').prop('disabled', false).html('<i class="submit-icon"></i>Submit Application');
+                    return false;
+                }
+
+                form.submit();
             }
+        });
 
-            // Real-time validation for file inputs
-            $('input[type="file"]').on('change', function() {
-                $(this).valid(); // Trigger validation for this field
+        // Custom validation methods
+        $.validator.addMethod("maxDate", function(value, element) {
+            if (this.optional(element)) {
+                return true;
+            }
+            var selectedDate = new Date(value);
+            var today = new Date();
+            return selectedDate <= today;
+        }, "Date cannot be in the future");
 
-                // Clear file size error if any
-                $(this).siblings('.text-danger').filter(function() {
-                    return $(this).text() === 'File size must be less than 5MB';
-                }).remove();
+        $.validator.addMethod("accept", function(value, element, param) {
+            if (this.optional(element)) {
+                return true;
+            }
+            if (!value) return true;
 
-                // Validate file size immediately
+            var extension = value.split('.').pop().toLowerCase();
+            var mimeType = $(element).prop('files')[0].type;
+
+            return param.split(',').indexOf(mimeType) !== -1;
+        });
+
+        // File size validation
+        function validateFileSizes() {
+            var maxSize = 5 * 1024 * 1024;
+            var isValid = true;
+
+            $('input[type="file"]').each(function() {
                 if (this.files && this.files[0]) {
-                    var maxSize = 5 * 1024 * 1024; // 5MB
                     if (this.files[0].size > maxSize) {
+                        isValid = false;
                         $(this).addClass('is-invalid');
+                        $(this).siblings('.text-danger').remove();
                         $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
                     }
                 }
             });
 
-            // Dynamic validation for creditor fields (if you add more creditors dynamically)
-            function setupCreditorValidation(index) {
-                $('input[name="creditor[' + index + '][name]"]').rules('add', {
-                    required: true,
-                    maxlength: 100
-                });
+            return isValid;
+        }
 
-                $('input[name="creditor[' + index + '][amount_outstanding]"]').rules('add', {
-                    required: true,
-                    number: true,
-                    min: 0
-                });
+        // File input change handler
+        $('input[type="file"]').on('change', function() {
+            $(this).valid();
+            $(this).siblings('.text-danger').filter(function() {
+                return $(this).text() === 'File size must be less than 5MB';
+            }).remove();
 
-                // Add similar rules for other creditor fields...
+            if (this.files && this.files[0]) {
+                var maxSize = 5 * 1024 * 1024;
+                if (this.files[0].size > maxSize) {
+                    $(this).addClass('is-invalid');
+                    $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
+                }
             }
-
-            // Initialize validation for first creditor
-            setupCreditorValidation(0);
         });
-    })
+
+        // Initialize validation for existing creditors on page load
+        function initializeCreditorValidation() {
+            $('.creditor-block').each(function() {
+                const index = $(this).data('index');
+                addCreditorValidationRules(index);
+            });
+        }
+
+        // Initialize everything when document is ready
+        initializeCreditorValidation();
+    });
 </script>
 @endsection
