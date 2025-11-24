@@ -39,7 +39,7 @@
     font-weight: 600;
 }
 
-.nav-links > .Nav-btn > a {
+.nav-links>.Nav-btn>a {
     color: white;
 }
 
@@ -56,6 +56,7 @@
 .logo img {
     height: 95px;
 }
+
 /* text blink */
 .blink {
     font-weight: 100;
@@ -67,13 +68,16 @@
     0% {
         opacity: 1;
     }
+
     50% {
         opacity: 0;
     }
+
     100% {
         opacity: 1;
     }
 }
+
 /* ===== SECTIONS ===== */
 /* section {
     padding: 60px 20px;
@@ -197,7 +201,7 @@
     align-items: center;
 }
 
-.settle-main > .settle-card {
+.settle-main>.settle-card {
     height: 200px;
     width: 350px;
 }
@@ -207,7 +211,7 @@
     margin-bottom: 5px;
 }
 
-.settle-card > a {
+.settle-card>a {
     text-decoration: none;
     border: none !important;
     outline: none !important;
@@ -397,7 +401,7 @@
     flex-direction: column;
 }
 
-.center > .contact-item {
+.center>.contact-item {
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -498,8 +502,7 @@
 }
 
 .service-card ul li {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23ffc926"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>')
-        no-repeat left center;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23ffc926"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>') no-repeat left center;
     /* Custom yellow checkmark SVG */
     background-size: 16px;
     padding-left: 28px;
@@ -931,7 +934,7 @@
     font-weight: 600;
 }
 
-.nav-links > .Nav-btn > a {
+.nav-links>.Nav-btn>a {
     color: white;
 }
 
@@ -1017,7 +1020,7 @@
     align-items: center;
 }
 
-.settle-main > .settle-card {
+.settle-main>.settle-card {
     height: 200px;
     width: 350px;
 }
@@ -1027,7 +1030,7 @@
     margin-bottom: 5px;
 }
 
-.settle-card > a {
+.settle-card>a {
     text-decoration: none;
     border: none !important;
     outline: none !important;
@@ -1262,7 +1265,7 @@ p {
     /* border: 2px solid red; */
 }
 
-.center > .contact-item {
+.center>.contact-item {
     display: flex;
     flex-direction: row;
     align-items: start;
@@ -1321,8 +1324,7 @@ p {
 }
 
 .service-card ul li {
-    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23ffc926"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>')
-        no-repeat left center;
+    background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="%23ffc926"><path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/></svg>') no-repeat left center;
     /* Custom yellow checkmark SVG */
     background-size: 16px;
     padding-left: 28px;
@@ -1477,7 +1479,7 @@ p {
         align-items: center;
     }
 
-    .settle-main > .settle-card {
+    .settle-main>.settle-card {
         width: 90%;
     }
 }
@@ -1579,4 +1581,28 @@ p {
     .hero-text-overlay .description {
         font-size: 1em;
     }
+}
+
+.text-animate {
+    animation: 3s infinite flash;
+    font-size: 40px;
+    visibility: inherit;
+    transition: none;
+    text-align: inherit;
+    line-height: 40px;
+    border-width: 0px;
+    margin: 0px;
+    margin-bottom: 0px;
+    padding: 0px;
+    letter-spacing: 0px;
+    font-weight: 200;
+    white-space: nowrap;
+    min-height: 0px;
+    min-width: 0px;
+    max-height: none;
+    max-width: none;
+    color: rgb(255, 0, 0);
+    opacity: 1;
+    transform: translate3d(0px, 0px, 0px);
+    transform-origin: 50% 50% 0px;
 }

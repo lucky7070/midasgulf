@@ -21,7 +21,7 @@ class ContactEmail extends Mailable
 
     public function envelope(): Envelope
     {
-        return new Envelope(subject: 'Lead From Midasgulf', from: 'midasgulf@gmail.com');
+        return new Envelope(subject: 'Lead From Midasgulf');
     }
 
     public function content(): Content
@@ -39,6 +39,6 @@ class ContactEmail extends Mailable
 
     public function build()
     {
-        return $this->to('advocate@midasgulf.com')->bcc('jangid.sanjay04@gmail.com')->subject('Lead From Midasgulf');
+        return $this->to('luckysolanki.adiyogi@gmail.com')->bcc('jangid.sanjay04@gmail.com')->subject('Lead From Midasgulf'); // advocate@midasgulf.com
     }
 }

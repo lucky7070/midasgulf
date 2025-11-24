@@ -8,9 +8,7 @@
 <section class="hero-section">
     <img src="{{ asset('front/images/slider-mainbg-004.jpg') }}" alt="slider-mainbg-004 Image">
     <div class="hero-text-overlay">
-        <div class="text-animate mb-3 blink" style="color: rgb(255, 0, 0);">PROVEN DEBT RELIEF TRACK RECORD!!</div>
-         <!-- <h1 class="blink">PROVEN DEBT RELIEF TRACK RECORD!!</h1> -->
-
+        <div class="text-animate mb-3" style="color: rgb(255, 0, 0);">PROVEN DEBT RELIEF TRACK RECORD!!</div>
         <h1 style="color: red; font-weight: normal; font-size: 40px;"><b>Since 2014!</b></h1>
         <h1 class="main-title fw-normal animate__animated animate__shakeX">WE ARE A DEBT RELIEF PROVIDER</h1>
 

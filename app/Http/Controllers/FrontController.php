@@ -41,7 +41,11 @@ class FrontController extends Controller
         ]);
 
         $contact = Contact::create($data);
-        Mail::send(new ContactEmail($contact));
+        try {
+            Mail::send(new ContactEmail($contact));
+        } catch (\Throwable $th) {
+        }
+        
         return to_route('contact')->withSuccess('Enquery submitted successfully..!!');
     }
 
