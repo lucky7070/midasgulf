@@ -182,24 +182,27 @@
                         @enderror
                     </div>
                 </div>
-             <div class="section-group">
-               <h4 class="fw-normal">Case Status</h4>
+            <div class="section-group">
+    <h4 class="fw-normal">Case Status</h4>
     
-                <label class="checkbox-label">
-                  <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
-                     Active Criminal Case
-                </label>
+    <label class="checkbox-label">
+        <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
+        Active Criminal Case
+    </label>
+     <div id="criminal_case_details" style="display: none;">
+        <textarea id="criminal_case_description" style=" width:100%;" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here..."></textarea>
+    </div>
+    <label class="checkbox-label">
+        <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
+        Active Civil Case
+    </label>
+    <div id="civil_case_details" style="display: none;">
+        <textarea id="civil_case_description" style=" width:100%;" name="civil_case_description" rows="4" placeholder="Enter civil case details here..."></textarea>
+    </div>
+   
     
-                <label class="checkbox-label">
-                  <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
-                   Active Civil Case
-                   </label>
     
-                   <div id="case_details" style="display: none;">
-                    <label for="case_description">Case Details:</label>
-                     <textarea id="case_description" name="case_description" rows="4" placeholder="Enter case details here..."></textarea>
-                     </div>
-                    </div>
+</div>
                 <div class="section-group personal-info">
                     <h4 class="fw-normal">Personal Information</h4>
                     <div class="row">
@@ -383,21 +386,30 @@
 
 
 //text area  visible 
-function toggleTextarea() {
+function toggleTextareas() {
         const criminalChecked = document.getElementById('active_criminal_case').checked;
         const civilChecked = document.getElementById('active_civil_case').checked;
         
-        if (criminalChecked || civilChecked) {
-            document.getElementById('case_details').style.display = 'block';
+        if (criminalChecked) {
+            document.getElementById('criminal_case_details').style.display = 'block';
         } else {
-            document.getElementById('case_details').style.display = 'none';
+            document.getElementById('criminal_case_details').style.display = 'none';
+        }
+
+        if (civilChecked) {
+            document.getElementById('civil_case_details').style.display = 'block';
+        } else {
+            document.getElementById('civil_case_details').style.display = 'none';
         }
     }
+    document.getElementById('active_criminal_case').addEventListener('change', toggleTextareas);
+    document.getElementById('active_civil_case').addEventListener('change', toggleTextareas);
 
-    document.getElementById('active_criminal_case').addEventListener('change', toggleTextarea);
-    document.getElementById('active_civil_case').addEventListener('change', toggleTextarea);
 
-    toggleTextarea();
+    toggleTextareas();
+
+
+
 
     $(document).ready(function() {
         $(document).ready(function() {
