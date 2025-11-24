@@ -831,27 +831,90 @@
 }
 
 /* ===== RESPONSIVE BREAKPOINTS ===== */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .navbar {
-        position: relative;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        padding: 0px;
     }
 
     .nav-links {
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background: #fff;
-        width: 100%;
-        flex-direction: column;
-        text-align: center;
-        gap: 15px;
-        padding: 20px 0;
-        display: none;
-        border-bottom: 1px solid #ccc;
+        height: 60px;
+        width: 60%;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        gap: 25px;
+        padding: 0px;
     }
-
+    
     .hamburger {
         display: flex;
+    }
+} */
+/* For screens smaller than 500px */
+@media (max-width: 500px) {
+    /* Navbar */
+    .navbar {
+        width: 100%;
+        display: flex;
+        justify-content: center; /* Center content horizontally */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
+        text-align: center; /* Ensure text is centered */
+    }
+
+    /* Nav links */
+    .nav-links {
+        width: auto; /* Allow the nav-links to take only necessary space */
+        display: flex;
+        justify-content: center; /* Center the items horizontally */
+        align-items: center; /* Center vertically */
+        padding: 0; /* Remove padding */
+        margin: 0; /* Remove margin */
+        list-style: none; /* Remove list style */
+    }
+
+    /* Individual links inside the nav */
+    .nav-links li {
+        margin: 0 10px; /* Add spacing between each link */
+    }
+
+    .logo {
+        display: flex;
+        justify-content: center; /* Center logo horizontally */
+        margin-right: 0; /* Remove any right margin */
+    }
+
+    /* Logo image */
+    .logo img {
+        width: auto;
+        height: 40px; /* Adjust logo size if necessary */
+    }
+
+    /* Hide hamburger menu when visible */
+    .hamburger {
+        display: none; /* Hide hamburger menu */
+    }
+}
+
+/* For screens larger than 500px but smaller than 768px */
+@media (max-width: 768px) and (min-width: 500px) {
+    .navbar {
+        width: 100%;
+        display: flex;
+        justify-content: space-between; /* Space between the logo and nav links */
+        padding: 0;
+    }
+
+    .nav-links {
+        width: 60%;
+        display: flex;
+        justify-content: space-between; /* Space out nav items */
+        padding: 0;
+        margin: 0;
+        list-style: none;
     }
 }
 
@@ -1439,7 +1502,7 @@ p {
 }
 
 /* ===== RESPONSIVE BREAKPOINTS ===== */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
     .navbar {
         position: relative;
     }
@@ -1461,8 +1524,14 @@ p {
     .hamburger {
         display: flex;
     }
-}
-
+} */
+/* //hero section  */
+/* .hero-section {
+    position: relative;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden;
+} */
 @media (max-width: 480px) {
     .logo {
         font-size: 18px;

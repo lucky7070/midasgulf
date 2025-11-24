@@ -39,7 +39,7 @@
 .service-details .card-icon {
     width: 60px;
     height: 60px;
-    background-color: #fef4e3; /* Light yellow background */
+    background-color: #ffc107; /* Light yellow background */
     border-radius: 10px; /* Square icon with rounded corners */
     display: flex;
     justify-content: center;
@@ -200,6 +200,11 @@
     font-size: 1.1em;
 }
 
+svg {
+    width: 60px;
+    height: 60px;
+    fill: white;
+}
 .upload-box label span {
     display: block;
     font-weight: 400;
@@ -246,12 +251,15 @@
     font-size: 1.2em;
 }
 
-/* --- Settlement Specific Styling Overrides --- */
-
-/* Ensures the icon background is used if needed */
 .settlement-icon {
-    /* If you need a different background color for Settlement icon, define it here */
-    background-color: #fef4e3;
+    width: 60px;
+    height: 60px;
+    background-color: #ffc107;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 15px;
 }
 
 /* --- Settlement Specific Fields Layout --- */
