@@ -14,11 +14,8 @@
         </div>
         <div class="form-header-area">
             <div class="service-details">
-                <div class="card-icon settlement-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                        <path
-                            d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6h-2c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" />
-                    </svg>
+                <div class="">
+                    <img style="width: 100px;" src="{{ asset('front/images/debt-restructuring.png') }}" alt="" srcset="">
                 </div>
                 <h2>Debt Restructuring</h2>
                 <p class="service-tagline">
@@ -167,6 +164,7 @@
                                         <option value="business-loan" {{ old('creditor.0.type_of_debt') == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
                                         <option value="vehicle-loan" {{ old('creditor.0.type_of_debt') == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
                                         <option value="housing-loan" {{ old('creditor.0.type_of_debt') == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
+                                        <option value="rental-disputes" {{ old('creditor.0.type_of_debt') == 'rental-disputes' ? 'selected' : '' }}>Rental Disputes</option>
                                         <option value="other" {{ old('creditor.0.type_of_debt') == 'other' ? 'selected' : '' }}>Other</option>
                                     </select>
                                     @error("creditor.0.type_of_debt")
@@ -300,6 +298,7 @@
                                         <option value="business-loan" {{ old("creditor.$index.type_of_debt") == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
                                         <option value="vehicle-loan" {{ old("creditor.$index.type_of_debt") == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
                                         <option value="housing-loan" {{ old("creditor.$index.type_of_debt") == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
+                                        <option value="rental-disputes" {{ old("creditor.$index.type_of_debt") == 'rental-disputes' ? 'selected' : '' }}>Rental Disputes</option>
                                         <option value="other" {{ old("creditor.$index.type_of_debt") == 'other' ? 'selected' : '' }}>Other</option>
                                     </select>
                                     @error("creditor.{$index}.type_of_debt")
@@ -528,6 +527,7 @@
                                 <option value="business-loan">Business Loan</option>
                                 <option value="vehicle-loan">Vehicle Loan</option>
                                 <option value="housing-loan">Housing Loan</option>
+                                <option value="rental-disputes">Rental Disputes</option>
                                 <option value="other">Other</option>
                             </select>
                         </div>
@@ -599,7 +599,6 @@
             });
 
             $(`input[name="creditor[${index}][phone]"]`).rules('add', {
-                required: true,
                 minlength: 8,
                 maxlength: 15,
                 digits: true,
@@ -614,7 +613,6 @@
             $(`input[name="creditor[${index}][email]"]`).rules('add', {
                 email: true,
                 customEmail: true,
-                required: true,
                 maxlength: 100,
                 messages: {
                     required: "Email is required",
@@ -641,8 +639,10 @@
 
             $(`input[name="creditor[${index}][emi_per_month]"]`).rules('add', {
                 number: true,
+                required: true,
                 min: 0,
                 messages: {
+                    required: 'Please enter amount',
                     number: "Please enter a valid number",
                     min: "EMI cannot be negative"
                 }
@@ -650,8 +650,10 @@
 
             $(`input[name="creditor[${index}][cheque_value]"]`).rules('add', {
                 number: true,
+                required: true,
                 min: 0,
                 messages: {
+                    required: 'Please enter amount',
                     number: "Please enter a valid number",
                     min: "Cheque value cannot be negative"
                 }

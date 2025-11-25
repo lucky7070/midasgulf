@@ -24,6 +24,7 @@ Route::view('/terms-conditions', 'front.terms-conditions')->name('terms-conditio
 Route::view('/privacy-policy', 'front.privacy-policy')->name('privacy-policy');
 Route::view('/refund-policy', 'front.refund-policy')->name('refund-policy');
 
+Route::view('/our-services', 'front.our-services')->name('our-services');
 Route::view('/debt-settlement', 'front.debt-settlement')->name('debt-settlement');
 Route::post('/debt-settlement', [FrontController::class, 'debtRestructuring'])->name('debt-settlement');
 

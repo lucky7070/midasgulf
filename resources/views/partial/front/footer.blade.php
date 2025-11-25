@@ -69,113 +69,83 @@
             <div class="footer-col">
                 <h3 class="col-header">Payment Methods</h3>
                 <div class="accent-line"></div>
-                <p class="text-sm text-muted" style="margin-bottom: 24px;">CASH, CARD AND ONLINE PAYMENT ARE
+                <p class="small text-white" style="margin-bottom: 24px;">CASH, CARD AND ONLINE PAYMENT ARE
                     ACCEPTED</p>
                 <div class="payment-logos">
-                    <!-- Visa / Mastercard Mockup -->
-                    <div class="visa-mastercard-logo">
-                        <img src="{{ asset('front/icon/master-visa.webp') }}" alt="master-visa">
+                    <div style="max-width:140px">
+                        <img src="{{ asset('front/icon/master-visa.webp') }}" alt="master-visa" class="w-100">
                     </div>
-
-                    <!-- Network International Payment Solutions Mockup -->
-                    <div class="network-logo">
-                        <img src="{{ asset('front/icon/network.webp') }}" alt="network">
+                    <div style="max-width:140px">
+                        <img src="{{ asset('front/icon/network.webp') }}" alt="network" class="w-100">
                     </div>
                 </div>
             </div>
-            <!-- 2. Contact Us Column -->
+
             <div class="footer-col">
                 <h3 class="col-header">CONTACT US</h3>
                 <div class="accent-line"></div>
-
                 <div class="new" style="margin-bottom: 1rem; display: flex; flex-direction: column; gap: 10px;">
-                    <!-- Email -->
                     <div class="contact-item">
-                        <div class="footer-right"> <span><i class="fas fa-envelope"></i>
-                            </span></div>
-                        <div class="footer-left">
+                        <div class="d-flex gap-2">
+                            <i class="fas fa-envelope"></i>
                             <a href="mailto:help@midasgulf.com" class="text-link">help@midasgulf.com</a>
                         </div>
                     </div>
-
-                    <!-- Phone 1 -->
                     <div class="contact-item">
-                        <div class="footer-right"> <span><i class="fas fa-phone contact-icon gold"></i>
-                            </span></div>
-                        <div class="footer-left">
-                            <p class="text-light">04-566-5861</p>
+                        <div class="d-flex gap-2">
+                            <i class="fas fa-phone contact-icon gold"></i>
+                            <p class="text-light mb-0">04-566-5861</p>
                         </div>
                     </div>
-
-                    <!-- Toll Free -->
                     <div class="contact-item">
-                        <div class="footer-right"><span><i class="fas fa-phone contact-icon gold"></i>
-                            </span></div>
-                        <div>
-                            <div class="footer-left1">
-                                <p class="text-muted" style="margin-bottom: 4px;">Toll Free (UAE Only):</p><br>
+                        <div class="d-flex gap-2">
+                            <i class="fas fa-phone contact-icon gold"></i>
+                            <div class="">
+                                <p class="mb-0">Toll Free (UAE Only):</p>
                                 <a href="tel:800643274853" class="text-link">800MIDASGULF <span class="text-gold">(800-643274853)</span></a>
                             </div>
                         </div>
                     </div>
-
-                    <!-- WhatsApp/Mobile -->
                     <div class="contact-item">
-                        <div class="footer-right"> <span><i class="fa-brands fa-whatsapp"></i>
-                            </span></div>
-                        <div class="footer-right">
-                            <a href="https://wa.me/971528867088" target="_blank" class="text-link" style="color: var(--text-light);">+971528867088</a>
+                        <div class="d-flex gap-2">
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <a href="https://wa.me/971528867088" target="_blank" class="text-link">+971528867088</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. Opening Times Column -->
+
             <div class="footer-col">
                 <h3 class="col-header">OPENING TIMES</h3>
                 <div class="accent-line"></div>
 
                 <div class="center">
-                    <div class="contact-item" style="margin-top: 0; margin-bottom: 16px;">
-                        <p><span class="text-muted">Working Days:</span> <span class="text-muted">Monday-Friday</span></p>
-                    </div>
-                    <div class="contact-item" style="margin-top: 0; margin-bottom: 16px;">
-                        <p><span class="text-muted">Monday-Thursday:</span> <span class="text-muted">9am -
-                                6pm</span></p>
-                    </div>
-                    <div class="contact-item" style="margin-top: 0; margin-bottom: 16px;">
-                        <p><span class="text-muted">Friday:</span> 9am - 4pm</p>
-                    </div>
+                    <div class="contact-item mb-2">Working Days: Monday-Friday</div>
+                    <div class="contact-item mb-2">Monday-Thursday: 9am - 6pm</div>
+                    <div class="contact-item mb-2">Friday: 9am - 4pm</div>
                 </div>
             </div>
-            <!-- 4. Address Column -->
+
             <div class="footer-col">
                 <h3 class="col-header">Address</h3>
                 <div class="accent-line"></div>
 
-                <div style="margin-bottom: 24px;">
-                    <!-- Dubai Address -->
-                    <div class="contact-item2">
-                        <div class="spanTag">
-                            <span> <i class="fal fa-map-marker-alt"></i>
-                            </span>
-                        </div>
-                        <address class="text-muted" style="font-style: normal;">
-                            Dubai Office: Office 123, Deeyaar Building, Al Barsha 1, <br>
+                <div style="margin-bottom: 24px; font-size: 14px;">
+                    <div class="contact-item2 mb-2">
+                        <i class="fal fa-map-marker-alt"></i>
+                        <p class="mb-0">
+                            Dubai Office: Office 123, Deyaar Building, Al Barsha 1, <br>
                             Behind Mall of the Emirates, Dubai, U.A.E.
-                        </address>
+                        </p>
                     </div>
 
-                    <!-- Sharjah Address -->
-                    <div class="contact-item2">
-                        <div class="spanTag">
-                            <span> <i class="fal fa-map-marker-alt"></i>
-                            </span>
-                        </div>
-                        <address class="text-muted" style="font-style: normal;">
+                    <div class="contact-item2 mb-2">
+                        <i class="fal fa-map-marker-alt"></i>
+                        <p class="mb-0">
                             Sharjah Office: F24, Sharjah Publishing City Free Zone, <br>
                             Sharjah, United Arab Emirates
-                        </address>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -209,7 +179,7 @@
     <div class="modal-content">
         <span class="close-btn" style="margin-top: 30px; margin-left: 23px;">&times;</span>
         <div class="modal-first">
-            
+
             <h2 id="modal-service-title" class="modal-title"></h2>
         </div>
         <p id="modal-subtitle" class="modal-subtitle small" style="padding-top: 18px;"></p>

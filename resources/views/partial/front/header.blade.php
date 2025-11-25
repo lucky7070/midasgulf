@@ -16,6 +16,7 @@
     </a>
     <ul class="nav-links hamburger">
         <li><a href="{{ route('home') }}">HOME</a></li>
+        <li><a href="{{ route('our-services') }}">OUR SERVICES</a></li>
         <li class="Nav-btn"><a href="{{ route('contact') }}">CONTACT US</a></li>
     </ul>
 </nav>
