@@ -160,6 +160,12 @@
                 label.addClass('fs--1 text-danger');
                 label.insertAfter(element);
             },
+            submitHandler: function(form) {
+                var submitButton = $(form).find('button[type="submit"]');
+                submitButton.prop('disabled', true);
+                submitButton.text('Sending...');
+                form.submit();
+            }
         });
     });
 </script>

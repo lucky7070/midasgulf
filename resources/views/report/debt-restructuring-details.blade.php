@@ -51,47 +51,43 @@
                             <div class="row text-sm">
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Name:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $data->name ?? '--' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['name'] ?? '--' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Amount Outstanding:</span>
-                                    <span class="fw-medium text-dark ms-2">${{ number_format($data->amount_outstanding ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">${{ number_format($row['amount_outstanding'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Email:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $data->email ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['email'] ?? 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Phone:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $data->phone ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ?? 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Contact Person:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $data->person_name ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['person_name'] ?? 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Last Payment:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $data->last_payment ? date('M d, Y', strtotime($data->last_payment)) : 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['last_payment'] ? date('M d, Y', strtotime($row['last_payment'])) : 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">EMI per Month:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($data->emi_per_month ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($row['emi_per_month'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Cheque Value:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($data->cheque_value ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($row['cheque_value'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Minimum Amount:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($data->minimum_amount ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($row['minimum_amount'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Maximum Amount:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($data->maximum_amount ?? 0, 2) }}</span>
-                                </div>
-                                <div class="col-md-6 mb-2">
-                                    <span class="field-label">Security Cheque Value:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($data->security_cheque_value ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($row['maximum_amount'] ?? 0, 2) }}</span>
                                 </div>
                             </div>
                         </div>

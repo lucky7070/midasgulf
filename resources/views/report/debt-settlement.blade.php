@@ -21,6 +21,7 @@
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Client Status</th>
+                                <th>Submit Date</th>
                                 <th width="100px">Action</th>
                             </tr>
                         </thead>
@@ -40,7 +41,7 @@
         var table = $('.table-datatable').DataTable({
             ajax: "{{ request()->url() }}",
             order: [
-                [0, 'desc']
+                [4, 'desc']
             ],
             columns: [{
                     data: 'name',
@@ -57,6 +58,10 @@
                 {
                     data: 'client_status',
                     name: 'client_status'
+                },
+                {
+                    data: 'created_at',
+                    name: 'created_at',
                 },
                 {
                     data: 'action',

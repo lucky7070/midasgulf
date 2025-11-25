@@ -28,8 +28,7 @@
 
         <form class="main-debt-application-form" method="POST" action="{{ request()->url() }}" enctype="multipart/form-data">
             @csrf
-            <input type="hidden" name="type" value="1">
-
+            <input type="hidden" name="type" value="2">
             <div class="form-section-card">
                 <h3>Client Profile Information</h3>
                 <div class="section-group">
@@ -94,14 +93,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Creditor Phone</label>
+                                    <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
                                     <input type="tel" name="creditor[0][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="{{ old('creditor.0.phone') }}">
                                     @error("creditor.0.phone")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Creditor Email</label>
+                                    <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
                                     <input type="email" name="creditor[0][email]" class="form-control" placeholder="email@example.com" value="{{ old('creditor.0.email') }}">
                                     @error("creditor.0.email")
                                     <small class="text-danger">{{ $message }}</small>
@@ -128,13 +127,6 @@
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
-                                <div class="col-md-6 mb-3">
-                                    <label class="form-label">Security Cheque Value (AED)</label>
-                                    <input type="number" name="creditor[0][cheque_value]" class="form-control" placeholder="0" value="{{ old('creditor.0.cheque_value') }}">
-                                    @error("creditor.0.cheque_value")
-                                    <small class="text-danger">{{ $message }}</small>
-                                    @enderror
-                                </div>
 
                                 <div class="col-12 mb-2 p-4 creditor-fields">
                                     <div class="row bg-primary bg-opacity-10 p-2 rounded-3 border border-primary">
@@ -158,13 +150,14 @@
                                     </div>
                                 </div>
 
-                                <div class="col-lg-6 mb-2">
-                                    <label for="" class="form-label">Security Cheque Value (AED)</label>
-                                    <input type="number" placeholder="e.g. 10000" class="form-control" name="creditor[0][security_cheque_value]" value="{{ old('creditor.0.security_cheque_value') }}">
-                                    @error("creditor.0.security_cheque_value")
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Security Cheque Value (AED)</label>
+                                    <input type="number" name="creditor[0][cheque_value]" class="form-control" placeholder="0" value="{{ old('creditor.0.cheque_value') }}">
+                                    @error("creditor.0.cheque_value")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
+
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
                                     <select name="creditor[0][type_of_debt]" class="form-control">
@@ -224,7 +217,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6 mb-2 creditor-fields">
-                                    <label class="form-label">Creditor Phone</label>
+                                    <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
                                     <input
                                         type="tel"
                                         name="creditor[{{ $index }}][phone]"
@@ -236,7 +229,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6 mb-2 creditor-fields">
-                                    <label class="form-label">Creditor Email</label>
+                                    <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
                                     <input
                                         type="email"
                                         name="creditor[{{ $index }}][email]"
@@ -330,6 +323,9 @@
                     </label>
                     <div id="criminal_case_details" style="display: none;" class="my-2">
                         <textarea id="criminal_case_description" class="form-control" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here...">{{ old('criminal_case_description') }}</textarea>
+                        @error('criminal_case_description')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <label class="checkbox-label">
                         <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
@@ -337,6 +333,9 @@
                     </label>
                     <div id="civil_case_details" style="display: none;" class="my-2">
                         <textarea id="civil_case_description" class="form-control" name="civil_case_description" rows="4" placeholder="Enter civil case details here...">{{ old('civil_case_description') }}</textarea>
+                        @error('civil_case_description')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
 
@@ -478,8 +477,6 @@
 <script>
     $(document).ready(function() {
         let creditorIndex = parseInt("{{ max(array_keys(old('creditor', [0]))) + 1 }}");
-
-        // Add new creditor
         $('#add-creditor-btn').click(function() {
             const newCreditorHtml = `
                 <div class="creditor-block mb-4 p-3 border rounded" data-index="${creditorIndex}">
@@ -499,11 +496,11 @@
                             <input type="number" name="creditor[${creditorIndex}][amount_outstanding]" class="form-control creditor-amount" placeholder="0" value="">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Creditor Phone</label>
+                            <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
                             <input type="tel" name="creditor[${creditorIndex}][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Creditor Email</label>
+                            <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
                             <input type="email" name="creditor[${creditorIndex}][email]" class="form-control" placeholder="email@example.com" value="">
                         </div>
                         <div class="col-md-6 mb-3">
@@ -539,15 +536,11 @@
             `;
 
             $('#creditors-container').append(newCreditorHtml);
-
-            // Enable remove button for first creditor if this is the second one
             if (creditorIndex === 1) {
                 $('.creditor-block[data-index="0"] .remove-creditor').prop('disabled', false);
             }
 
-            // Add validation rules for the new creditor fields
             addCreditorValidationRules(creditorIndex);
-
             creditorIndex++;
         });
 
@@ -555,22 +548,14 @@
         $(document).on('click', '.remove-creditor', function() {
             const creditorBlock = $(this).closest('.creditor-block');
             const index = creditorBlock.data('index');
-
-            // Remove validation rules before removing the element
             removeCreditorValidationRules(index);
-
             creditorBlock.remove();
-
-            // Renumber remaining creditors
             renumberCreditors();
-
-            // Disable remove button if only one creditor remains
             if ($('.creditor-block').length === 1) {
                 $('.creditor-block .remove-creditor').prop('disabled', true);
             }
         });
 
-        // Renumber creditors after removal
         function renumberCreditors() {
             let currentIndex = 0;
             $('.creditor-block').each(function() {
@@ -578,27 +563,21 @@
                 $(this).attr('data-index', currentIndex);
                 $(this).find('h5').text(`Creditor #${currentIndex + 1}`);
 
-                // Update all input names and validation rules
                 $(this).find('[name]').each(function() {
                     const name = $(this).attr('name');
                     const newName = name.replace(/creditor\[\d+\]/, `creditor[${currentIndex}]`);
                     $(this).attr('name', newName);
                 });
 
-                // Update validation rules for this creditor
                 updateCreditorValidationRules(oldIndex, currentIndex);
-
                 currentIndex++;
             });
 
             creditorIndex = currentIndex;
         }
 
-        // Add validation rules for a specific creditor index
         function addCreditorValidationRules(index) {
             const validator = $('.main-debt-application-form').validate();
-
-            // Creditor name
             $(`input[name="creditor[${index}][name]"]`).rules('add', {
                 required: true,
                 maxlength: 100,
@@ -608,7 +587,6 @@
                 }
             });
 
-            // Amount outstanding
             $(`input[name="creditor[${index}][amount_outstanding]"]`).rules('add', {
                 required: true,
                 number: true,
@@ -620,27 +598,31 @@
                 }
             });
 
-            // Creditor phone
             $(`input[name="creditor[${index}][phone]"]`).rules('add', {
-                maxlength: 20,
+                required: true,
+                minlength: 8,
+                maxlength: 15,
                 digits: true,
                 messages: {
-                    maxlength: "Phone number cannot exceed 20 digits",
+                    required: "Phone is required",
+                    minlength: "Phone number must be at least 8 digits",
+                    maxlength: "Phone number cannot exceed 15 digits",
                     digits: "Please enter only digits"
                 }
             });
 
-            // Creditor email
             $(`input[name="creditor[${index}][email]"]`).rules('add', {
                 email: true,
-                maxlength: 255,
+                customEmail: true,
+                required: true,
+                maxlength: 100,
                 messages: {
+                    required: "Email is required",
                     email: "Please enter a valid email address",
-                    maxlength: "Email cannot exceed 255 characters"
+                    maxlength: "Email cannot exceed 100 characters"
                 }
             });
 
-            // Contact person name
             $(`input[name="creditor[${index}][person_name]"]`).rules('add', {
                 maxlength: 255,
                 messages: {
@@ -648,7 +630,6 @@
                 }
             });
 
-            // Last payment date
             $(`input[name="creditor[${index}][last_payment]"]`).rules('add', {
                 date: true,
                 maxDate: new Date().toISOString().split('T')[0],
@@ -658,7 +639,6 @@
                 }
             });
 
-            // EMI per month
             $(`input[name="creditor[${index}][emi_per_month]"]`).rules('add', {
                 number: true,
                 min: 0,
@@ -668,7 +648,6 @@
                 }
             });
 
-            // Cheque value
             $(`input[name="creditor[${index}][cheque_value]"]`).rules('add', {
                 number: true,
                 min: 0,
@@ -678,7 +657,6 @@
                 }
             });
 
-            // Type of debt
             $(`select[name="creditor[${index}][type_of_debt]"]`).rules('add', {
                 required: true,
                 messages: {
@@ -718,7 +696,6 @@
         $('#active_criminal_case, #active_civil_case').on('change', toggleTextareas);
         toggleTextareas();
 
-        // jQuery Validation - Initialize with basic rules
         $('.main-debt-application-form').validate({
             rules: {
                 name: {
@@ -729,12 +706,13 @@
                 email: {
                     required: true,
                     email: true,
+                    customEmail: true,
                     maxlength: 50
                 },
                 phone: {
                     required: true,
                     minlength: 8,
-                    maxlength: 12,
+                    maxlength: 15,
                     digits: true
                 },
                 client_status: {
@@ -773,7 +751,7 @@
                 phone: {
                     required: "Please enter your phone number",
                     minlength: "Phone number must be at least 8 digits",
-                    maxlength: "Phone number cannot exceed 12 digits",
+                    maxlength: "Phone number cannot exceed 15 digits",
                     digits: "Please enter only digits"
                 },
                 client_status: {
@@ -822,8 +800,6 @@
             },
             submitHandler: function(form) {
                 $('.btn-submit-app').prop('disabled', true).html('<i class="submit-icon"></i>Submitting...');
-
-                // Validate file sizes (optional additional validation)
                 if (!validateFileSizes()) {
                     $('.btn-submit-app').prop('disabled', false).html('<i class="submit-icon"></i>Submit Application');
                     return false;
@@ -832,6 +808,11 @@
                 form.submit();
             }
         });
+
+        $.validator.addMethod("customEmail", function(t, a) {
+            var e = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            return this.optional(a) || e.test(t)
+        }, "Invalid Email Address.")
 
         // Custom validation methods
         $.validator.addMethod("maxDate", function(value, element) {
@@ -844,9 +825,7 @@
         }, "Date cannot be in the future");
 
         $.validator.addMethod("accept", function(value, element, param) {
-            if (this.optional(element)) {
-                return true;
-            }
+            if (this.optional(element)) return true;
             if (!value) return true;
 
             var extension = value.split('.').pop().toLowerCase();
@@ -864,9 +843,13 @@
                 if (this.files && this.files[0]) {
                     if (this.files[0].size > maxSize) {
                         isValid = false;
-                        $(this).addClass('is-invalid');
                         $(this).siblings('.text-danger').remove();
-                        $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
+                        $(this).parent().addClass("highlight-error").removeClass("highlight").append('<small class="text-danger">File size must be less than 5MB</small>');
+                    } else if (!["image/png", "image/jpg", "application/pdf"].includes(this.files[0].type)) {
+                        $(this).parent().addClass("highlight-error").removeClass("highlight").append('<small class="text-danger">File type must be image or pdf.</small>');
+                    } else {
+                        $(this).parent().addClass("highlight").removeClass("highlight-error");
+                        $(this).parent().find('small.text-danger').remove();
                     }
                 }
             });
@@ -884,8 +867,14 @@
             if (this.files && this.files[0]) {
                 var maxSize = 5 * 1024 * 1024;
                 if (this.files[0].size > maxSize) {
-                    $(this).addClass('is-invalid');
-                    $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
+                    $(this).parent().addClass("highlight-error").removeClass("highlight");
+                    $(this).parent().append('<small class="text-danger">File size must be less than 5MB</small>');
+                } else if (!["image/png", "image/jpg", "application/pdf"].includes(this.files[0].type)) {
+                    $(this).parent().addClass("highlight-error").removeClass("highlight");
+                    $(this).parent().append('<small class="text-danger">File type must be image or pdf.</small>');
+                } else {
+                    $(this).parent().addClass("highlight").removeClass("highlight-error");
+                    $(this).parent().find('small.text-danger').remove();
                 }
             }
         });
@@ -900,6 +889,8 @@
 
         // Initialize everything when document is ready
         initializeCreditorValidation();
+
+
     });
 </script>
 @endsection

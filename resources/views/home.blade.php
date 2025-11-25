@@ -6,7 +6,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between">
-                    <h5>WellCome</h5>
+                    <h5>WelCome</h5>
                 </div>
             </div>
             <div class="card-body">

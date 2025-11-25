@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-pro/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('front/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/style.css?v=1.1') }}">
     @yield('css')
 </head>
 
@@ -33,7 +33,7 @@
             const modalSubtitle3 = document.getElementById("service-desc2");
 
 
-            
+
 
             openBtns.forEach(btn => {
                 btn.addEventListener('click', function(event) {
@@ -93,7 +93,7 @@
                         case "Supplier":
                             modalBox.classList.add("bg-supplier");
                             modalSubtitle.textContent = `If you are facing difficulty in making payments to your supplier or have defaulted on your payments, we at Midas gulf will help you to solve your problems and financial issues by negotiating with the vendors or banks to get a feasible repayment schedule depending on your financial situation.`;
-                             modalSubtitle2.textContent = `Negotiate supplier debt settlements to resolve outstanding balances. Keep business operations running smoothly.`;
+                            modalSubtitle2.textContent = `Negotiate supplier debt settlements to resolve outstanding balances. Keep business operations running smoothly.`;
                             modalSubtitle3.textContent = `Restructure supplier credit terms with flexible payment options. Preserve critical business supply chains.`;
                             break;
                     }

@@ -46,7 +46,7 @@ class FrontController extends Controller
         } catch (\Throwable $th) {
         }
 
-        return to_route('contact')->withSuccess('Enquery submitted successfully..!!');
+        return back()->withSuccess('Enquery submitted successfully..!!');
     }
 
     public function debtRestructuring(Request $request): RedirectResponse
@@ -90,11 +90,11 @@ class FrontController extends Controller
             "type"                              => ['required', 'integer', 'in:1,2'],
             "name"                              => ['required', 'string', 'min:2', 'max:100'],
             "email"                             => ['required', 'string', 'min:2', 'max:50', 'email'],
-            "phone"                             => ['required', 'string', 'min:8', 'max:12',],
+            "phone"                             => ['required', 'string', 'min:8', 'max:15',],
             "active_criminal_case"              => ['boolean'],
             "active_civil_case"                 => ['boolean'],
-            "criminal_case_description"         => ['string', 'max:1000'],
-            "civil_case_description"            => ['string', 'max:1000'],
+            "criminal_case_description"         => ['nullable', 'string', 'max:1000'],
+            "civil_case_description"            => ['nullable', 'string', 'max:1000'],
             "currently_in_country"              => ['boolean'],
             "valid_passport"                    => ['boolean'],
             "creditor"                          => ['required'],
@@ -108,23 +108,23 @@ class FrontController extends Controller
             'creditor'                          => ['required', 'array', 'min:1'],
             'creditor.*.name'                   => ['required', 'string', 'max:100'],
             'creditor.*.amount_outstanding'     => ['required', 'numeric', 'min:0'],
-            'creditor.*.phone'                  => ['nullable', 'string', 'max:20'],
-            'creditor.*.email'                  => ['nullable', 'email', 'max:255'],
+            'creditor.*.phone'                  => ['required', 'string', 'max:20'],
+            'creditor.*.email'                  => ['required', 'email', 'max:255'],
             'creditor.*.person_name'            => ['nullable', 'string', 'max:255'],
             'creditor.*.last_payment'           => ['nullable', 'date', 'before_or_equal:today'],
             'creditor.*.emi_per_month'          => ['nullable', 'numeric', 'min:0'],
             'creditor.*.cheque_value'           => ['nullable', 'numeric', 'min:0'],
             'creditor.*.minimum_amount'         => ['nullable', 'numeric', 'min:0'],
             'creditor.*.maximum_amount'         => ['nullable', 'numeric', 'min:0'],
-            'creditor.*.security_cheque_value'  => ['nullable', 'numeric', 'min:0'],
             'creditor.*.type_of_debt'           => ['required', 'in:credit-card,personal-loan,business-loan,vehicle-loan,housing-loan,other'],
         ], $messages);
 
         $data['slug'] = Str::uuid();
-        if ($request->file('settlement_upload_emirates_front')) $user['settlement_upload_emirates_front']   = Helper::saveFile($request->file('settlement_upload_emirates_front'), 'debt');
-        if ($request->file('settlement_upload_emirates_back'))  $user['settlement_upload_emirates_back']    = Helper::saveFile($request->file('settlement_upload_emirates_back'), 'debt');
-        if ($request->file('settlement_upload_passport'))       $user['settlement_upload_passport']         = Helper::saveFile($request->file('settlement_upload_passport'), 'debt');
-        if ($request->file('settlement_upload_license'))        $user['settlement_upload_license']          = Helper::saveFile($request->file('settlement_upload_license'), 'debt');
+        if ($request->file('settlement_upload_emirates_front')) $data['settlement_upload_emirates_front']   = Helper::saveFile($request->file('settlement_upload_emirates_front'), 'debt');
+        if ($request->file('settlement_upload_emirates_back'))  $data['settlement_upload_emirates_back']    = Helper::saveFile($request->file('settlement_upload_emirates_back'), 'debt');
+        if ($request->file('settlement_upload_passport'))       $data['settlement_upload_passport']         = Helper::saveFile($request->file('settlement_upload_passport'), 'debt');
+        if ($request->file('settlement_upload_license'))        $data['settlement_upload_license']          = Helper::saveFile($request->file('settlement_upload_license'), 'debt');
+        if ($request->file('settlement_upload_ejari'))          $data['settlement_upload_ejari']            = Helper::saveFile($request->file('settlement_upload_ejari'), 'debt');
 
         $debt = Debt::create($data);
         return to_route('checkout', $debt->slug)->withSuccess('Enquery submitted successfully..!!');

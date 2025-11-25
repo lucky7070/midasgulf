@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('settlement_upload_emirates_back')->nullable();
             $table->string('settlement_upload_passport')->nullable();
             $table->string('settlement_upload_license')->nullable();
+            $table->string('settlement_upload_ejari')->nullable();
 
             $table->softDeletes();
             $table->timestamps();

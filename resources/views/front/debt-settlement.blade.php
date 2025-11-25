@@ -34,7 +34,6 @@
         <form class="main-debt-application-form" method="POST" action="{{ request()->url() }}" enctype="multipart/form-data">
             @csrf
             <input type="hidden" name="type" value="1">
-
             <div class="form-section-card">
                 <h3>Client Profile Information</h3>
                 <div class="section-group">
@@ -99,14 +98,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Creditor Phone</label>
+                                    <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
                                     <input type="tel" name="creditor[0][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="{{ old('creditor.0.phone') }}">
                                     @error("creditor.0.phone")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Creditor Email</label>
+                                    <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
                                     <input type="email" name="creditor[0][email]" class="form-control" placeholder="email@example.com" value="{{ old('creditor.0.email') }}">
                                     @error("creditor.0.email")
                                     <small class="text-danger">{{ $message }}</small>
@@ -199,7 +198,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6 mb-2 creditor-fields">
-                                    <label class="form-label">Creditor Phone</label>
+                                    <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
                                     <input
                                         type="tel"
                                         name="creditor[{{ $index }}][phone]"
@@ -211,7 +210,7 @@
                                     @enderror
                                 </div>
                                 <div class="col-lg-6 mb-2 creditor-fields">
-                                    <label class="form-label">Creditor Email</label>
+                                    <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
                                     <input
                                         type="email"
                                         name="creditor[{{ $index }}][email]"
@@ -303,6 +302,9 @@
                     </label>
                     <div id="criminal_case_details" style="display: none;" class="my-2">
                         <textarea id="criminal_case_description" class="form-control" name="criminal_case_description" rows="4" placeholder="Enter criminal case details here...">{{ old('criminal_case_description') }}</textarea>
+                        @error('criminal_case_description')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                     <label class="checkbox-label">
                         <input type="checkbox" name="active_civil_case" value="1" id="active_civil_case" @checked(old('active_civil_case'))>
@@ -310,6 +312,9 @@
                     </label>
                     <div id="civil_case_details" style="display: none;" class="my-2">
                         <textarea id="civil_case_description" class="form-control" name="civil_case_description" rows="4" placeholder="Enter civil case details here...">{{ old('civil_case_description') }}</textarea>
+                        @error('civil_case_description')
+                        <small class="text-danger">{{ $message }}</small>
+                        @enderror
                     </div>
                 </div>
 
@@ -471,11 +476,11 @@
                             <input type="number" name="creditor[${creditorIndex}][amount_outstanding]" class="form-control creditor-amount" placeholder="0" value="">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Creditor Phone</label>
+                            <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
                             <input type="tel" name="creditor[${creditorIndex}][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="">
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label class="form-label">Creditor Email</label>
+                            <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
                             <input type="email" name="creditor[${creditorIndex}][email]" class="form-control" placeholder="email@example.com" value="">
                         </div>
                         <div class="col-md-6 mb-3">
@@ -592,12 +597,15 @@
                 }
             });
 
-            // Creditor phone
             $(`input[name="creditor[${index}][phone]"]`).rules('add', {
-                maxlength: 20,
+                required: true,
+                minlength: 8,
+                maxlength: 15,
                 digits: true,
                 messages: {
-                    maxlength: "Phone number cannot exceed 20 digits",
+                    required: "Phone is required",
+                    minlength: "Phone number must be at least 8 digits",
+                    maxlength: "Phone number cannot exceed 15 digits",
                     digits: "Please enter only digits"
                 }
             });
@@ -605,10 +613,13 @@
             // Creditor email
             $(`input[name="creditor[${index}][email]"]`).rules('add', {
                 email: true,
-                maxlength: 255,
+                customEmail: true,
+                required: true,
+                maxlength: 100,
                 messages: {
+                    required: "Email is required",
                     email: "Please enter a valid email address",
-                    maxlength: "Email cannot exceed 255 characters"
+                    maxlength: "Email cannot exceed 100 characters"
                 }
             });
 
@@ -701,12 +712,13 @@
                 email: {
                     required: true,
                     email: true,
+                    customEmail: true,
                     maxlength: 50
                 },
                 phone: {
                     required: true,
                     minlength: 8,
-                    maxlength: 12,
+                    maxlength: 15,
                     digits: true
                 },
                 client_status: {
@@ -745,7 +757,7 @@
                 phone: {
                     required: "Please enter your phone number",
                     minlength: "Phone number must be at least 8 digits",
-                    maxlength: "Phone number cannot exceed 12 digits",
+                    maxlength: "Phone number cannot exceed 15 digits",
                     digits: "Please enter only digits"
                 },
                 client_status: {
@@ -805,6 +817,11 @@
             }
         });
 
+        $.validator.addMethod("customEmail", function(t, a) {
+            var e = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+            return this.optional(a) || e.test(t)
+        }, "Invalid Email Address.")
+
         // Custom validation methods
         $.validator.addMethod("maxDate", function(value, element) {
             if (this.optional(element)) {
@@ -827,7 +844,6 @@
             return param.split(',').indexOf(mimeType) !== -1;
         });
 
-        // File size validation
         function validateFileSizes() {
             var maxSize = 5 * 1024 * 1024;
             var isValid = true;
@@ -836,9 +852,13 @@
                 if (this.files && this.files[0]) {
                     if (this.files[0].size > maxSize) {
                         isValid = false;
-                        $(this).addClass('is-invalid');
                         $(this).siblings('.text-danger').remove();
-                        $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
+                        $(this).parent().addClass("highlight-error").removeClass("highlight").append('<small class="text-danger">File size must be less than 5MB</small>');
+                    } else if (!["image/png", "image/jpg", "application/pdf"].includes(this.files[0].type)) {
+                        $(this).parent().addClass("highlight-error").removeClass("highlight").append('<small class="text-danger">File type must be image or pdf.</small>');
+                    } else {
+                        $(this).parent().addClass("highlight").removeClass("highlight-error");
+                        $(this).parent().find('small.text-danger').remove();
                     }
                 }
             });
@@ -856,8 +876,14 @@
             if (this.files && this.files[0]) {
                 var maxSize = 5 * 1024 * 1024;
                 if (this.files[0].size > maxSize) {
-                    $(this).addClass('is-invalid');
-                    $(this).after('<small class="text-danger">File size must be less than 5MB</small>');
+                    $(this).parent().addClass("highlight-error").removeClass("highlight");
+                    $(this).parent().append('<small class="text-danger">File size must be less than 5MB</small>');
+                } else if (!["image/png", "image/jpg", "application/pdf"].includes(this.files[0].type)) {
+                    $(this).parent().addClass("highlight-error").removeClass("highlight");
+                    $(this).parent().append('<small class="text-danger">File type must be image or pdf.</small>');
+                } else {
+                    $(this).parent().addClass("highlight").removeClass("highlight-error");
+                    $(this).parent().find('small.text-danger').remove();
                 }
             }
         });

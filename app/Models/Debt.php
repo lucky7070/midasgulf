@@ -29,6 +29,7 @@ class Debt extends Model
         'settlement_upload_emirates_front',
         'settlement_upload_emirates_back',
         'settlement_upload_passport',
+        'settlement_upload_license',
         'settlement_upload_ejari',
     ];
 

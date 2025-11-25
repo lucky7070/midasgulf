@@ -648,6 +648,7 @@
 .main-enquiry-form .btn-submit-app:hover {
     background-color: #b8860b;
 }
+
 #modal-subtitle {
     font-size: 14px;
     color: #555;
@@ -855,47 +856,63 @@
 } */
 /* For screens smaller than 500px */
 @media (max-width: 500px) {
+
     /* Navbar */
     .navbar {
         width: 100%;
         display: flex;
-        justify-content: center; /* Center content horizontally */
-        padding: 0; /* Remove padding */
-        margin: 0; /* Remove margin */
-        text-align: center; /* Ensure text is centered */
+        justify-content: center;
+        /* Center content horizontally */
+        padding: 0;
+        /* Remove padding */
+        margin: 0;
+        /* Remove margin */
+        text-align: center;
+        /* Ensure text is centered */
     }
 
     /* Nav links */
     .nav-links {
-        width: auto; /* Allow the nav-links to take only necessary space */
+        width: auto;
+        /* Allow the nav-links to take only necessary space */
         display: flex;
-        justify-content: center; /* Center the items horizontally */
-        align-items: center; /* Center vertically */
-        padding: 0; /* Remove padding */
-        margin: 0; /* Remove margin */
-        list-style: none; /* Remove list style */
+        justify-content: center;
+        /* Center the items horizontally */
+        align-items: center;
+        /* Center vertically */
+        padding: 0;
+        /* Remove padding */
+        margin: 0;
+        /* Remove margin */
+        list-style: none;
+        /* Remove list style */
     }
 
     /* Individual links inside the nav */
     .nav-links li {
-        margin: 0 10px; /* Add spacing between each link */
+        margin: 0 10px;
+        /* Add spacing between each link */
     }
 
     .logo {
         display: flex;
-        justify-content: center; /* Center logo horizontally */
-        margin-right: 0; /* Remove any right margin */
+        justify-content: center;
+        /* Center logo horizontally */
+        margin-right: 0;
+        /* Remove any right margin */
     }
 
     /* Logo image */
     .logo img {
         width: auto;
-        height: 40px; /* Adjust logo size if necessary */
+        height: 40px;
+        /* Adjust logo size if necessary */
     }
 
     /* Hide hamburger menu when visible */
     .hamburger {
-        display: none; /* Hide hamburger menu */
+        display: none;
+        /* Hide hamburger menu */
     }
 }
 
@@ -904,14 +921,16 @@
     .navbar {
         width: 100%;
         display: flex;
-        justify-content: space-between; /* Space between the logo and nav links */
+        justify-content: space-between;
+        /* Space between the logo and nav links */
         padding: 0;
     }
 
     .nav-links {
         width: 60%;
         display: flex;
-        justify-content: space-between; /* Space out nav items */
+        justify-content: space-between;
+        /* Space out nav items */
         padding: 0;
         margin: 0;
         list-style: none;
@@ -1040,11 +1059,6 @@
 .logo img {
     height: 95px;
 }
-
-/* ===== SECTIONS ===== */
-/* section {
-    padding: 60px 20px;
-} */
 
 /* Card Section */
 .settlement-section {
@@ -1700,4 +1714,14 @@ p {
     opacity: 1;
     transform: translate3d(0px, 0px, 0px);
     transform-origin: 50% 50% 0px;
+}
+
+.upload-box.highlight {
+    border-color: #28a745;
+    background: #e9ffe9;
+}
+
+.upload-box.highlight-error {
+    border-color: #e40316;
+    background: #f9dee1;
 }

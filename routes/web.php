@@ -35,6 +35,7 @@ Route::get('checkout/{slug}', [FrontController::class, 'checkout'])->name('check
 Route::view('/contact', 'front.contact')->name('contact');
 Route::post('/contact', [FrontController::class, 'contactUs'])->name('contact');
 
+Route::view('/legal-services-ppc', 'front.legal-services-ppc')->name('legal-services-ppc');
 
 Route::get('test', [CommonController::class, 'test'])->name('test');
 Route::get('{guard}', fn($guard) => redirect($guard == 'admin' ?  url('/admin/login') : url("/$guard/login")))->whereIn('guard', ['admin']);
