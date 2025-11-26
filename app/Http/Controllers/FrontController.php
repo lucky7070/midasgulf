@@ -46,7 +46,7 @@ class FrontController extends Controller
         } catch (\Throwable $th) {
         }
 
-        return back()->withSuccess('Enquery submitted successfully..!!');
+        return back()->withSuccess('Enquiry submitted successfully..!!');
     }
 
     public function debtRestructuring(Request $request): RedirectResponse
@@ -85,17 +85,18 @@ class FrontController extends Controller
             'creditor.*.type_of_debt.required' => 'Type of debt is required.',
             'creditor.*.type_of_debt.in' => 'Please select a valid type of debt.',
         ];
-
+        
         $data = $request->validate([
             "type"                              => ['required', 'integer', 'in:1,2'],
             "name"                              => ['required', 'string', 'min:2', 'max:100'],
             "email"                             => ['required', 'string', 'min:2', 'max:50', 'email'],
+            "country_code"                      => ['required', 'string', 'min:1', 'max:10',],
             "phone"                             => ['required', 'string', 'min:8', 'max:15',],
             "active_criminal_case"              => ['boolean'],
             "active_civil_case"                 => ['boolean'],
             "criminal_case_description"         => ['nullable', 'string', 'max:1000'],
             "civil_case_description"            => ['nullable', 'string', 'max:1000'],
-            "currently_in_country"              => ['boolean'],
+            "currently_in_country"              => ['required', 'integer', 'in:0,1'],
             "valid_passport"                    => ['boolean'],
             "creditor"                          => ['required'],
             "client_status"                     => ['required', 'string', 'in:individual,corporate'],
@@ -116,8 +117,21 @@ class FrontController extends Controller
             'creditor.*.cheque_value'           => ['required', 'numeric', 'min:0'],
             'creditor.*.minimum_amount'         => ['nullable', 'numeric', 'min:0'],
             'creditor.*.maximum_amount'         => ['nullable', 'numeric', 'min:0'],
-            'creditor.*.type_of_debt'           => ['required', 'in:credit-card,personal-loan,business-loan,vehicle-loan,housing-loan,other'],
+            'creditor.*.country_code'           => ['nullable', 'string', 'max:10'],
+            'creditor.*.loan_account'           => ['nullable', 'string', 'max:100'],
+            'creditor.*.type_of_debt'           => ['required', 'string'], // 'in:credit-card,personal-loan,business-loan,vehicle-loan,housing-loan,other'
         ], $messages);
+
+        $hasFile = false;
+        $fileFields = ['settlement_upload_emirates_front', 'settlement_upload_emirates_back', 'settlement_upload_passport', 'settlement_upload_license', 'settlement_upload_ejari'];
+        foreach ($fileFields as $field) {
+            if ($request->hasFile($field) && $request->file($field)->isValid()) {
+                $hasFile = true;
+                break;
+            }
+        }
+
+        if (!$hasFile) return back()->withInput()->withErrors(['file_attachment_group' => 'Please upload at least one document.']);
 
         $data['slug'] = Str::uuid();
         if ($request->file('settlement_upload_emirates_front')) $data['settlement_upload_emirates_front']   = Helper::saveFile($request->file('settlement_upload_emirates_front'), 'debt');
@@ -127,7 +141,7 @@ class FrontController extends Controller
         if ($request->file('settlement_upload_ejari'))          $data['settlement_upload_ejari']            = Helper::saveFile($request->file('settlement_upload_ejari'), 'debt');
 
         $debt = Debt::create($data);
-        return to_route('checkout', $debt->slug)->withSuccess('Enquery submitted successfully..!!');
+        return to_route('checkout', $debt->slug)->withSuccess('Enquiry submitted successfully..!!');
     }
 
     public function checkout(Request $request, $token): RedirectResponse| View

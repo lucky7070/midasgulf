@@ -15,6 +15,7 @@ class Debt extends Model
         'slug',
         'type',
         'name',
+        'country_code',
         'phone',
         'email',
         'creditor',

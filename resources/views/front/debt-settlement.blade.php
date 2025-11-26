@@ -8,7 +8,7 @@
 <section id="debt-restructuring-form">
     <div class="container">
         <div class="py-2">
-            <a href="{{ route('home') }}" class="back-to-services">
+            <a href="{{ route('our-services') }}" class="back-to-services">
                 &larr; Back to Services
             </a>
         </div>
@@ -47,8 +47,15 @@
                             @enderror
                         </div>
                         <div class="col-md-4">
-                            <label for="" class="form-label mb-1">Phone Number <span class="text-danger">*</span></label>
-                            <input type="tel" name="phone" placeholder="+971 XX XXX XXXX" class="form-control" value="{{ old('phone') }}">
+                            <label for="country_code" class="form-label mb-1">Phone Number <span class="text-danger">*</span></label>
+                            <div class="input-group">
+                                <select name="country_code" id="country_code" class="form-control" style="max-width: 120px;">
+                                    @foreach(config('constant.countries', []) as $row)
+                                    <option value="{{ $row['code'] }}">{{ $row['flag'] }} {{ $row['code'] }}</option>
+                                    @endforeach
+                                </select>
+                                <input type="tel" name="phone" placeholder="XX XXX XXXX" class="form-control" value="{{ old('phone') }}">
+                            </div>
                             @error('phone')
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
@@ -91,14 +98,21 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
-                                    <input type="tel" name="creditor[0][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="{{ old('creditor.0.phone') }}">
+                                    <label class="form-label">Creditor Phone</label>
+                                    <div class="input-group">
+                                        <select name="creditor[0][country_code]" id="" class="form-control" style="max-width: 120px;">
+                                            @foreach(config('constant.countries', []) as $row)
+                                            <option value="{{ $row['code'] }}" @selected(old('creditor.0.country_code')===$row['code'])>{{ $row['flag'] }} {{ $row['code'] }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input type="tel" name="creditor[0][phone]" class="form-control" placeholder="XX XXX XXXX" value="{{ old('creditor.0.phone') }}">
+                                    </div>
                                     @error("creditor.0.phone")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
+                                    <label class="form-label">Creditor Email</label>
                                     <input type="email" name="creditor[0][email]" class="form-control" placeholder="email@example.com" value="{{ old('creditor.0.email') }}">
                                     @error("creditor.0.email")
                                     <small class="text-danger">{{ $message }}</small>
@@ -119,14 +133,14 @@
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Current EMI Per Month (AED)</label>
+                                    <label class="form-label">Current EMI Per Month (AED) <span class="text-danger">*</span></label>
                                     <input type="number" name="creditor[0][emi_per_month]" class="form-control" placeholder="0" value="{{ old('creditor.0.emi_per_month') }}">
                                     @error("creditor.0.emi_per_month")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label class="form-label">Security Cheque Value (AED)</label>
+                                    <label class="form-label">Security Cheque Value (AED) <span class="text-danger">*</span></label>
                                     <input type="number" name="creditor[0][cheque_value]" class="form-control" placeholder="0" value="{{ old('creditor.0.cheque_value') }}">
                                     @error("creditor.0.cheque_value")
                                     <small class="text-danger">{{ $message }}</small>
@@ -134,17 +148,27 @@
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
-                                    <select name="creditor[0][type_of_debt]" class="form-control">
-                                        <option value="">Select debt type</option>
-                                        <option value="credit-card" {{ old('creditor.0.type_of_debt') == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
-                                        <option value="personal-loan" {{ old('creditor.0.type_of_debt') == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
-                                        <option value="business-loan" {{ old('creditor.0.type_of_debt') == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
-                                        <option value="vehicle-loan" {{ old('creditor.0.type_of_debt') == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
-                                        <option value="housing-loan" {{ old('creditor.0.type_of_debt') == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
-                                        <option value="rental-disputes" {{ old("creditor.0.type_of_debt") == 'rental-disputes' ? 'selected' : '' }}>Rental Disputes</option>
-                                        <option value="other" {{ old('creditor.0.type_of_debt') == 'other' ? 'selected' : '' }}>Other</option>
-                                    </select>
+                                    <div class="input-group">
+                                        <select name="creditor[0][specify_type_of_debt]" class="form-control type_of_debt">
+                                            <option value="">Select debt type</option>
+                                            <option value="credit-card" {{ old('creditor.0.type_of_debt') == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
+                                            <option value="personal-loan" {{ old('creditor.0.type_of_debt') == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
+                                            <option value="business-loan" {{ old('creditor.0.type_of_debt') == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
+                                            <option value="vehicle-loan" {{ old('creditor.0.type_of_debt') == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
+                                            <option value="housing-loan" {{ old('creditor.0.type_of_debt') == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
+                                            <option value="rental-disputes" {{ old('creditor.0.type_of_debt') == 'rental-disputes' ? 'selected' : '' }}>Rental Disputes</option>
+                                            <option value="other" {{ old('creditor.0.type_of_debt') == 'other' ? 'selected' : '' }}>Other</option>
+                                        </select>
+                                        <input type="text" name="creditor[0][type_of_debt]" class="form-control" placeholder="Please Specify" maxlength="50">
+                                    </div>
                                     @error("creditor.0.type_of_debt")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Loan Account / Case Number</label>
+                                    <input type="text" name="creditor[0][loan_account]" class="form-control" placeholder="0" value="{{ old('creditor.0.loan_account') }}">
+                                    @error("creditor.0.loan_account")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -165,9 +189,6 @@
 
                             <div class="row">
                                 <div class="col-lg-6 mb-2 creditor-fields" data-index="0">
-                                    <div class="creditor-header" style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span>Creditor 1</span>
-                                    </div>
                                     <label class="form-label">Creditor Name <span class="text-danger">*</span></label>
                                     <input
                                         type="text"
@@ -193,12 +214,19 @@
                                 </div>
                                 <div class="col-lg-6 mb-2 creditor-fields">
                                     <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
-                                    <input
-                                        type="tel"
-                                        name="creditor[{{ $index }}][phone]"
-                                        class="form-control"
-                                        placeholder="+971 XX XXX XXXX"
-                                        value="{{ $creditor['phone'] ?? '' }}" />
+                                    <div class="input-group">
+                                        <select name="creditor[{{ $index }}][country_code]" id="" class="form-control" style="max-width: 120px;">
+                                            @foreach(config('constant.countries', []) as $row)
+                                            <option value="{{ $row['code'] }}" @selected($creditor['amount_outstanding']===$row['code'])>{{ $row['flag'] }} {{ $row['code'] }}</option>
+                                            @endforeach
+                                        </select>
+                                        <input
+                                            type="tel"
+                                            name="creditor[{{ $index }}][phone]"
+                                            class="form-control"
+                                            placeholder="XX XXX XXXX"
+                                            value="{{ $creditor['phone'] ?? '' }}" />
+                                    </div>
                                     @error("creditor.{$index}.phone")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
@@ -264,19 +292,29 @@
                                 </div>
                                 <div class="col-lg-6 mb-2 creditor-fields">
                                     <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
-                                    <select
-                                        name="creditor[{{ $index }}][type_of_debt]"
-                                        class="form-control">
-                                        <option value="">Select debt type</option>
-                                        <option value="credit-card" {{ old("creditor.$index.type_of_debt") == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
-                                        <option value="personal-loan" {{ old("creditor.$index.type_of_debt") == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
-                                        <option value="business-loan" {{ old("creditor.$index.type_of_debt") == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
-                                        <option value="vehicle-loan" {{ old("creditor.$index.type_of_debt") == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
-                                        <option value="housing-loan" {{ old("creditor.$index.type_of_debt") == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
-                                        <option value="rental-disputes" {{ old('creditor.$index.type_of_debt') == 'rental-disputes' ? 'selected' : '' }}>Rental Disputes</option>
-                                        <option value="other" {{ old("creditor.$index.type_of_debt") == 'other' ? 'selected' : '' }}>Other</option>
-                                    </select>
+                                    <div class="input-group">
+                                        <select
+                                            name="creditor[{{ $index }}][specify_type_of_debt]"
+                                            class="form-control type_of_debt">
+                                            <option value="">Select debt type</option>
+                                            <option value="credit-card" {{ old("creditor.$index.type_of_debt") == 'credit-card' ? 'selected' : '' }}>Credit Card</option>
+                                            <option value="personal-loan" {{ old("creditor.$index.type_of_debt") == 'personal-loan' ? 'selected' : '' }}>Personal Loan</option>
+                                            <option value="business-loan" {{ old("creditor.$index.type_of_debt") == 'business-loan' ? 'selected' : '' }}>Business Loan</option>
+                                            <option value="vehicle-loan" {{ old("creditor.$index.type_of_debt") == 'vehicle-loan' ? 'selected' : '' }}>Vehicle Loan</option>
+                                            <option value="housing-loan" {{ old("creditor.$index.type_of_debt") == 'housing-loan' ? 'selected' : '' }}>Housing Loan</option>
+                                            <option value="rental-disputes" {{ old("creditor.$index.type_of_debt") == 'rental-disputes' ? 'selected' : '' }}>Rental Disputes</option>
+                                            <option value="other" {{ old("creditor.$index.type_of_debt") == 'other' ? 'selected' : '' }}>Other</option>
+                                        </select>
+                                        <input type="text" name="creditor[{{ $index }}][type_of_debt]" class="form-control is-valid" placeholder="Please Specify" maxlength="50" aria-invalid="false" required="">
+                                    </div>
                                     @error("creditor.{$index}.type_of_debt")
+                                    <small class="text-danger">{{ $message }}</small>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label">Loan Account / Case Number</label>
+                                    <input type="text" name="creditor[{{ $index }}][loan_account]" class="form-control" placeholder="0" value="{{ $creditor['loan_account'] ?? '' }}">
+                                    @error("creditor.{$index}.loan_account")
                                     <small class="text-danger">{{ $message }}</small>
                                     @enderror
                                 </div>
@@ -292,7 +330,7 @@
                 <div class="section-group">
                     <h4 class="fw-normal">Case Status</h4>
                     <label class="checkbox-label">
-                        <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case" @checked(old('active_criminal_case'))>
+                        <input type="checkbox" name="active_criminal_case" value="1" id="active_criminal_case">
                         Active Criminal Case
                     </label>
                     <div id="criminal_case_details" style="display: none;" class="my-2">
@@ -316,11 +354,21 @@
                 <div class="section-group personal-info">
                     <h4 class="fw-normal">Personal Information</h4>
                     <div class="row">
-                        <div class="col-lg-6 mb-2">
-                            <label class="checkbox-label">
-                                <input type="checkbox" name="currently_in_country" value="1" @checked(old('currently_in_country', true))>
-                                Currently in the Country
-                            </label>
+                        <div class="col-lg-12 mb-2">
+                            <div class="input-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="currently_in_country_1" name="currently_in_country" value="1" @checked(old('currently_in_country', '1' )==='1' )>
+                                    <label class="checkbox-label" for="currently_in_country_1">
+                                        In UAE
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" id="currently_in_country_0" name="currently_in_country" value="0" @checked(old('currently_in_country')==='0' )>
+                                    <label class="checkbox-label" for="currently_in_country_0">
+                                        Outside UAE
+                                    </label>
+                                </div>
+                            </div>
                             <label class="checkbox-label">
                                 <input type="checkbox" name="valid_emirates_id" value="1" @checked(old('valid_emirates_id'))>
                                 Valid Emirates ID
@@ -341,7 +389,7 @@
                             <small class="text-danger">{{ $message }}</small>
                             @enderror
                         </div>
-                        <div class="col-lg-6 mt-0 mt-lg-2">
+                        <div class="col-lg-6 mb-2">
                             <label class="form-label" for="">Timeline to Close Issue <span class="text-danger">*</span></label>
                             <select name="timelineRequirement" class="form-select">
                                 <option value="">Select timeline</option>
@@ -354,6 +402,10 @@
                             @enderror
                         </div>
                     </div>
+
+                    @error('currently_in_country')
+                    <small class="text-danger">{{ $message }}</small>
+                    @enderror
                 </div>
 
                 <div class="section-group personal-info">
@@ -436,6 +488,11 @@
                             @enderror
                         </div>
                     </div>
+                    <div id="attachment-error">
+                        @error('file_attachment_group')
+                        <p class="text-danger mb-0">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
                 <div class="submit-area">
                     <button type="submit" class="btn-submit-app"><i class="submit-icon"></i>Submit Application</button>
@@ -452,6 +509,7 @@
         let creditorIndex = parseInt("{{ max(array_keys(old('creditor', [0]))) + 1 }}");
 
         // Add new creditor
+        const countries = $('#country_code').html();
         $('#add-creditor-btn').click(function() {
             const newCreditorHtml = `
                 <div class="creditor-block mb-4 p-3 border rounded" data-index="${creditorIndex}">
@@ -472,7 +530,12 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Creditor Phone <span class="text-danger">*</span></label>
-                            <input type="tel" name="creditor[${creditorIndex}][phone]" class="form-control" placeholder="+971 XX XXX XXXX" value="">
+                            <div class="input-group">
+                                <select name="creditor[${creditorIndex}][country_code]" id="" class="form-control" style="max-width: 120px;">
+                                    ${countries}
+                                </select>
+                                <input type="tel" name="creditor[${creditorIndex}][phone]" class="form-control" placeholder="XX XXX XXXX" value="">
+                            </div>
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Creditor Email <span class="text-danger">*</span></label>
@@ -496,16 +559,23 @@
                         </div>
                         <div class="col-md-6 mb-3">
                             <label class="form-label">Type of Debt <span class="text-danger">*</span></label>
-                            <select name="creditor[${creditorIndex}][type_of_debt]" class="form-control creditor-type">
-                                <option value="">Select debt type</option>
-                                <option value="credit-card">Credit Card</option>
-                                <option value="personal-loan">Personal Loan</option>
-                                <option value="business-loan">Business Loan</option>
-                                <option value="vehicle-loan">Vehicle Loan</option>
-                                <option value="housing-loan">Housing Loan</option>
-                                <option value="rental-disputes">Rental Disputes</option>
-                                <option value="other">Other</option>
-                            </select>
+                            <div class="input-group">
+                                <select name="creditor[${creditorIndex}][specify_type_of_debt]" class="form-control  type_of_debt creditor-type">
+                                    <option value="">Select debt type</option>
+                                    <option value="credit-card">Credit Card</option>
+                                    <option value="personal-loan">Personal Loan</option>
+                                    <option value="business-loan">Business Loan</option>
+                                    <option value="vehicle-loan">Vehicle Loan</option>
+                                    <option value="housing-loan">Housing Loan</option>
+                                    <option value="rental-disputes">Rental Disputes</option>
+                                    <option value="other">Other</option>
+                                </select>
+                                <input type="text" name="creditor[${creditorIndex}][type_of_debt]" class="form-control is-valid" placeholder="Please Specify" style="display:none" maxlength="50" aria-invalid="false" required="">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Loan Account / Case Number</label>
+                            <input type="text" name="creditor[${creditorIndex}][loan_account]" class="form-control" placeholder="0" value="">
                         </div>
                     </div>
                 </div>
@@ -666,6 +736,13 @@
                     required: "Please select type of debt"
                 }
             });
+
+            $(`select[name="creditor[${index}][specify_type_of_debt]"]`).rules('add', {
+                required: true,
+                messages: {
+                    required: ""
+                }
+            });
         }
 
         // Remove validation rules for a specific creditor index
@@ -679,6 +756,7 @@
             $(`input[name="creditor[${index}][emi_per_month]"]`).rules('remove');
             $(`input[name="creditor[${index}][cheque_value]"]`).rules('remove');
             $(`select[name="creditor[${index}][type_of_debt]"]`).rules('remove');
+            $(`select[name="creditor[${index}][specify_type_of_debt]"]`).rules('remove');
         }
 
         // Update validation rules when renumbering
@@ -712,6 +790,9 @@
                     email: true,
                     customEmail: true,
                     maxlength: 50
+                },
+                country_code: {
+                    required: true,
                 },
                 phone: {
                     required: true,
@@ -783,7 +864,9 @@
             errorElement: 'small',
             errorClass: 'text-danger',
             errorPlacement: function(error, element) {
-                if (element.attr('name') === 'active_criminal_case' ||
+                if (element.parent().hasClass('input-group')) {
+                    error.insertAfter(element.parent());
+                } else if (element.attr('name') === 'active_criminal_case' ||
                     element.attr('name') === 'active_civil_case' ||
                     element.attr('name') === 'currently_in_country' ||
                     element.attr('name') === 'valid_passport') {
@@ -808,6 +891,23 @@
                 // Validate file sizes (optional additional validation)
                 if (!validateFileSizes()) {
                     $('.btn-submit-app').prop('disabled', false).html('<i class="submit-icon"></i>Submit Application');
+                    return false;
+                }
+
+                let hasFile = false;
+                const fileInputs = ['settlement_upload_emirates_front', 'settlement_upload_emirates_back', 'settlement_upload_passport', 'settlement_upload_license', 'settlement_upload_ejari'];
+                for (const inputName of fileInputs) {
+                    const fileInput = $(`[name="${inputName}"]`)[0];
+                    if (fileInput && fileInput.files.length > 0) {
+                        hasFile = true;
+                        break;
+                    }
+                }
+
+                if (!hasFile) {
+                    toastr.error('Please upload at least one document');
+                    $('.btn-submit-app').prop('disabled', false).html('<i class="submit-icon"></i>Submit Application');
+                    $('#attachment-error').html('<p class="text-danger mb-0">Please upload at least one document</p>');
                     return false;
                 }
 
@@ -866,6 +966,7 @@
 
         // File input change handler
         $('input[type="file"]').on('change', function() {
+            $('#attachment-error').html('')
             $(this).valid();
             $(this).siblings('.text-danger').filter(function() {
                 return $(this).text() === 'File size must be less than 5MB';
@@ -884,6 +985,26 @@
                     $(this).parent().find('small.text-danger').remove();
                 }
             }
+        });
+
+        function toggleSpecifyInput(selectElement) {
+            const $select = $(selectElement);
+            const $inputGroup = $select.closest('.input-group');
+            const $specifyInput = $inputGroup.find('input[name$="[type_of_debt]"]');
+
+            if ($select.val() === 'other') {
+                $specifyInput.show().prop('required', true).val('');
+            } else {
+                $specifyInput.hide().prop('required', false).val($select.val());
+            }
+        }
+
+        $('.type_of_debt').each(function() {
+            toggleSpecifyInput(this);
+        });
+
+        $(document).on('change', '.type_of_debt', function() {
+            toggleSpecifyInput(this);
         });
 
         // Initialize validation for existing creditors on page load

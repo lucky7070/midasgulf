@@ -63,7 +63,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Phone:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ? $row['country_code']." ".$row['phone'] : 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Contact Person:</span>
@@ -80,6 +80,10 @@
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Cheque Value:</span>
                                     <span class="fw-medium text-dark ms-2">AED {{ number_format($row['cheque_value'] ?? 0, 2) }}</span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <span class="field-label">Loan Account / Case Number:</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['loan_account'] ?? 'N/A' }}</span>
                                 </div>
                             </div>
                         </div>
@@ -100,7 +104,7 @@
                         <p class="">{{ $data->criminal_case_description ?? 'N/A' }}</p>
                     </div>
                     <div class="">
-                        <label class="form-label mb-0 d-block fw-semibold">Active Criminal Case -
+                        <label class="form-label mb-0 d-block fw-semibold">Active Civil Case -
                             @if($data->active_civil_case)
                             <span class="badge text-bg-success">Yes</span>
                             @else

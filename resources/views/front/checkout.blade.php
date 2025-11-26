@@ -30,7 +30,7 @@
                         </div>
                         <div class="col-md-6">
                             <span class="text-muted">Phone:</span>
-                            <span class="fw-medium text-dark ms-2">{{ $data->phone }}</span>
+                            <span class="fw-medium text-dark ms-2">{{ $data->country_code." ".$data->phone }}</span>
                         </div>
                         <div class="col-md-6">
                             <span class="text-muted">Status:</span>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="text-muted">Phone:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ? $row['country_code']." ".$row['phone'] : 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="text-muted">Email:</span>
@@ -69,34 +69,17 @@
                         </div>
                         @endforeach
                     </div>
-
-                    <!-- <div class="mt-4 pt-3 border-top border-info border-opacity-25">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="bg-warning bg-opacity-25 p-3 rounded-3">
-                                    <p class="text-muted small mb-1">Total Outstanding Debt</p>
-                                    <p class="h4 fw-bold text-dark mb-0">AED 100</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="bg-warning bg-opacity-25 p-3 rounded-3">
-                                    <p class="text-muted small mb-1">Total Monthly EMI</p>
-                                    <p class="h4 fw-bold text-dark mb-0">AED 200</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
 
                 <div class="bg-white border border-2 border-warning p-5 rounded-3">
                     <h3 class="h4 fw-semibold text-dark mb-3 text-center">Would you like a consultation call?</h3>
                     <p class="text-muted text-center mb-4">Book a 30-minute Zoom call with our expert for AED 100 to discuss your case in detail</p>
                     <div class="d-flex gap-3 justify-content-center">
-                        <button class="btn btn-success px-4 py-2 rounded-2 fw-semibold d-flex align-items-center">
+                        <a href="{{ route('home') }}" data-click="alert" class="btn btn-success px-4 py-2 rounded-2 fw-semibold d-flex align-items-center">
                             <i class="bi bi-check-circle me-2"></i>
                             <span>Yes, Book Consultation</span>
-                        </button>
-                        <a href="{{ route('home') }}" class="btn btn-secondary px-4 py-2 rounded-2 fw-semibold d-flex align-items-center">
+                        </a>
+                        <a href="{{ route('home') }}" data-click="alert" class="btn btn-secondary px-4 py-2 rounded-2 fw-semibold d-flex align-items-center">
                             <i class="bi bi-x me-2"></i>
                             <span>No, Continue Without</span>
                         </a>
@@ -106,4 +89,18 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('js')
+<script>
+    $(document).ready(function() {
+        $('[data-click="alert"]').click(function(e) {
+            e.preventDefault();
+            toastr.success('Thank you for contacting Midas Gulf, kindly allow us a maximum period of 48 hours to revert to you on your mail id or via whatsapp. Thank you.');
+            setTimeout(() => {
+                window.location.replace($(this).attr('href'))
+            }, 2000)
+        })
+    })
+</script>
 @endsection
