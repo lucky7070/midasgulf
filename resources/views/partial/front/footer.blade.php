@@ -166,8 +166,7 @@
             </div>
         </div>
         <div class="copyright-text text-white">
-            © Copyright {{ date('Y') }} MIDAS GULF | All Rights Reserved. Developed By <span class="text-gold">JTITTLE INNOVATIONS PVT.
-                LTD.</span>
+            © Copyright {{ date('Y') }} MIDAS GULF | All Rights Reserved. Developed By <a href="https://brenin.co" target="_blank" class="text-gold">Brenin Inc.</a>
         </div>
     </div>
 </footer>

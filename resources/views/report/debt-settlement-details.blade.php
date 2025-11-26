@@ -46,7 +46,6 @@
                         <div class="bg-white p-3 rounded border border-info border-opacity-25 mb-2">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h4 class="h6 fw-semibold text-dark mb-0">Creditor {{ $key + 1 }}</h4>
-                                <span class="badge badge-secondary">{{ @$row['type_of_debt'] }}</span>
                             </div>
                             <div class="row text-sm">
                                 <div class="col-md-6 mb-2">
@@ -55,7 +54,7 @@
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Amount Outstanding:</span>
-                                    <span class="fw-medium text-dark ms-2">${{ number_format(@$row['amount_outstanding'] ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format(@$row['amount_outstanding'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Email:</span>
