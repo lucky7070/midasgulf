@@ -46,44 +46,48 @@
                         <div class="bg-white p-3 rounded border border-info border-opacity-25 mb-2">
                             <div class="d-flex align-items-center justify-content-between mb-2">
                                 <h4 class="h6 fw-semibold text-dark mb-0">Creditor {{ $key + 1 }}</h4>
-                                <span class="badge badge-secondary">{{ $row['type_of_debt'] }}</span>
+                                <span class="badge badge-secondary">{{ @$row['type_of_debt'] }}</span>
                             </div>
                             <div class="row text-sm">
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Name:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['name'] ?? '--' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['name'] ?? '--' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Amount Outstanding:</span>
-                                    <span class="fw-medium text-dark ms-2">${{ number_format($row['amount_outstanding'] ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">${{ number_format(@$row['amount_outstanding'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Email:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['email'] ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['email'] ?? 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Phone:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['phone'] ? $row['country_code']." ".$row['phone'] : 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['phone'] ? @$row['country_code']." ".@$row['phone'] : 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Contact Person:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['person_name'] ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['person_name'] ?? 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Last Payment:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['last_payment'] ? date('M d, Y', strtotime($row['last_payment'])) : 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['last_payment'] ? date('M d, Y', strtotime(@$row['last_payment'])) : 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">EMI per Month:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($row['emi_per_month'] ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format(@$row['emi_per_month'] ?? 0, 2) }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Cheque Value:</span>
-                                    <span class="fw-medium text-dark ms-2">AED {{ number_format($row['cheque_value'] ?? 0, 2) }}</span>
+                                    <span class="fw-medium text-dark ms-2">AED {{ number_format(@$row['cheque_value'] ?? 0, 2) }}</span>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <span class="field-label">Type of Debt:</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['type_of_debt'] ?? 'N/A' }}</span>
                                 </div>
                                 <div class="col-md-6 mb-2">
                                     <span class="field-label">Loan Account / Case Number:</span>
-                                    <span class="fw-medium text-dark ms-2">{{ $row['loan_account'] ?? 'N/A' }}</span>
+                                    <span class="fw-medium text-dark ms-2">{{ @$row['loan_account'] ?? 'N/A' }}</span>
                                 </div>
                             </div>
                         </div>
