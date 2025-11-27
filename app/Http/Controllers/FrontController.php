@@ -21,7 +21,9 @@ class FrontController extends Controller
             'first_name'    => ['required', 'string', 'min:2', 'max:50'],
             'last_name'     => ['required', 'string', 'min:2', 'max:50'],
             'email'         => ['required', 'string', 'min:2', 'max:50', 'email'],
-            'message'       => ['required', 'string', 'min:10', 'max:1000']
+            'message'       => ['required', 'string', 'min:10', 'max:1000'],
+            'country_code'  => ['required', 'string'],
+            'phone'         => ['required', 'string', 'min:8', 'max:15'],
         ], [
             'first_name.required'   => 'The first name field is required.',
             'first_name.string'     => 'The first name must be a string.',
@@ -86,7 +88,7 @@ class FrontController extends Controller
             'creditor.*.type_of_debt.required' => 'Type of debt is required.',
             'creditor.*.type_of_debt.in' => 'Please select a valid type of debt.',
         ];
-        
+
         $data = $request->validate([
             "type"                              => ['required', 'integer', 'in:1,2'],
             "name"                              => ['required', 'string', 'min:2', 'max:100'],

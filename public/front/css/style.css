@@ -1255,3 +1255,56 @@ h2 {
     border-color: #e40316;
     background: #f9dee1;
 }
+
+.first-footer {
+    padding: 55px 0;
+    background-image: url(../images/footer-bg-one.jpg);
+    background-position: center bottom;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: scroll;
+}
+
+.footer-logo {
+    margin-bottom: 45px;
+}
+
+.first-footer .widget-area {
+    padding: 33px 15px 37px;
+    position: relative;
+}
+
+.first-footer .footer-box {
+    border-top: 1px solid #e5eef7;
+    border-bottom: 1px solid #e5eef7;
+}
+
+.footer-box.no-gutters {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.footer-box .featured-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.footer-box .featured-box .featured-title h5 {
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+    .first-footer .widget-area:not(:last-child)::before {
+        position: absolute;
+        content: '';
+        height: 60%;
+        right: 0;
+        background-color: #e5eef7;
+        width: 1px;
+        top: 20%;
+    }
+}

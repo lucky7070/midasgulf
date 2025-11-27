@@ -24,7 +24,7 @@
                                 <h4 class="text-center mb-3 fw-semibold text-white">Book Your Free Consultation! </h4>
                                 <div class="">
                                     @csrf
-                                    
+
                                     <div class="mb-2">
                                         <input type="text" class="form-control form-control-lg" placeholder="First Name" name="first_name" value="{{ old('first_name') }}">
                                         @error("first_name")
@@ -44,7 +44,20 @@
                                         @enderror
                                     </div>
                                     <div class="mb-2">
-                                        <textarea rows="5" class="form-control form-control-lg" placeholder="Your Message" name="message">{{ old('message') }}</textarea>
+                                        <div class="input-group">
+                                            <select name="country_code" id="country_code" class="form-control form-control-lg" style="max-width: 120px;">
+                                                @foreach(config('constant.countries', []) as $row)
+                                                <option value="{{ $row['code'] }}" @selected(old('country_code')===$row['code'])>{{ $row['flag'] }} {{ $row['code'] }}</option>
+                                                @endforeach
+                                            </select>
+                                            <input type="tel" name="phone" placeholder="XX XXX XXXX" class="form-control form-control-lg" value="{{ old('phone') }}">
+                                        </div>
+                                        @error("phone")
+                                        <small class="text-white">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="mb-2">
+                                        <textarea rows="3" class="form-control form-control-lg" placeholder="Your Message" name="message">{{ old('message') }}</textarea>
                                         @error("message")
                                         <small class="text-white">{{ $message }}</small>
                                         @enderror
@@ -116,6 +129,14 @@
                     minlength: 2,
                     maxlength: 50,
                 },
+                country_code: {
+                    required: true
+                },
+                phone: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 15,
+                },
                 message: {
                     required: true,
                     minlength: 10,
@@ -146,8 +167,13 @@
                 },
             },
             errorPlacement: function(label, element) {
-                label.addClass('fs--1 text-white');
-                label.insertAfter(element);
+                if (element.parent().hasClass('input-group')) {
+                    label.addClass('fs--1 text-white');
+                    label.insertAfter(element.parent());
+                } else {
+                    label.addClass('fs--1 text-white');
+                    label.insertAfter(element);
+                }
             },
             submitHandler: function(form) {
                 var submitButton = $(form).find('button[type="submit"]');

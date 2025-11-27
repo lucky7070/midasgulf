@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('assets/plugins/bootstrap/bootstrap.min.css') }}" type="text/css" />
     <link rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-pro/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/toastr/toastr.min.css') }}" type="text/css" />
-    <link rel="stylesheet" href="{{ asset('front/css/style.css?v=1.2.1') }}">
+    <link rel="stylesheet" href="{{ asset('front/css/style.css?v=1.2.2') }}">
     @yield('css')
 </head>
 

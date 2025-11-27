@@ -15,6 +15,8 @@ class Contact extends Model
         'first_name',
         'last_name',
         'email',
-        'message'
+        'message',
+        'phone',
+        'country_code'
     ];
 }

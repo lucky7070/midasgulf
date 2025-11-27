@@ -61,7 +61,46 @@
         <i class="fab fa-whatsapp"></i>
     </a>
 </section>
-
+<section>
+    <div class="first-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer-logo">
+                        <img id="footer-logo-img" style="max-width: 100%; max-height: 120px; vertical-align: middle;" class="img-center" src="{{ asset('front/images/midas-logo.png') }}" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutters footer-box">
+                <div class="col-md-6 widget-area">
+                    <div class="featured-box text-center">
+                        <div class="featured-content">
+                            <div class="featured-title">
+                                <h5 class="fw-bold">Talk To Expert</h5>
+                            </div>
+                            <div class="featured-desc text-muted">
+                                <p class="mb-1">04-566-5861</p>
+                                <p><i class="fa fa-phone"></i> Toll Free (UAE Only): 800MIDASGULF <span style="color:red"> (800-643274853) </span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 widget-area">
+                    <div class="featured-box text-center">
+                        <div class="featured-content">
+                            <div class="featured-title">
+                                <h5 class="fw-bold">Email Us</h5>
+                            </div>
+                            <div class="featured-desc">
+                                <a class="text-muted text-decoration-none high" href="mailto:help@midasgulf.com">help@midasgulf.com</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 <footer class="footer">
     <div class="footer-inner">
         <div class="footer-content">
@@ -114,8 +153,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div class="footer-col">
                 <h3 class="col-header">OPENING TIMES</h3>
                 <div class="accent-line"></div>
@@ -126,7 +163,6 @@
                     <div class="contact-item mb-2">Friday: 9am - 4pm</div>
                 </div>
             </div>
-
             <div class="footer-col">
                 <h3 class="col-header">ADDRESS</h3>
                 <div class="accent-line"></div>
