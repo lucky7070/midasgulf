@@ -112,8 +112,7 @@
                 </div>
                 <div class="footer-section f-section-2">
                     <p class="">
-                        Delvelop By : <a href="https://brenin.co" target="_blank" class="text-gold">Brenin Inc.
-</a>
+                        Developed By : <a href="https://brenin.co" target="_blank" class="text-gold">Brenin Inc.</a>
                     </p>
                 </div>
             </div>

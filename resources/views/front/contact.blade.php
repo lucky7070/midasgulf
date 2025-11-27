@@ -1,7 +1,7 @@
 @extends('layouts.front')
 
 @section('css')
-<link rel="stylesheet" href="{{ asset('front/css/contact.css') }}">
+<link rel="stylesheet" href="{{ asset('front/css/contact.css?v=1.0') }}">
 @endsection
 
 @section('content')
@@ -74,6 +74,7 @@
                     <div class="w-50">
                         @csrf
                         <input type="text" name="first_name" placeholder="First Name" value="{{ old('first_name') }}">
+                        <input type="hidden" name="type" value="1">
                         @error('first_name')
                         <small class="text-danger">{{ $message }}</small>
                         @enderror
@@ -85,10 +86,23 @@
                         @enderror
                     </div>
                 </div>
-                <div class="">
+                <div class="mb-3">
                     <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
                     @error('email')
                     <small class="text-danger">{{ $message }}</small>
+                    @enderror
+                </div>
+                <div class="mb-3">
+                    <div class="input-group flex-nowrap">
+                        <select name="country_code" id="country_code" style="max-width: 120px;">
+                            @foreach(config('constant.countries', []) as $row)
+                            <option value="{{ $row['code'] }}" @selected(old('country_code')===$row['code'])>{{ $row['flag'] }} {{ $row['code'] }}</option>
+                            @endforeach
+                        </select>
+                        <input type="tel" name="phone" placeholder="XX XXX XXXX" value="{{ old('phone') }}">
+                    </div>
+                    @error("phone")
+                    <small class="text-white">{{ $message }}</small>
                     @enderror
                 </div>
                 <div class="">
@@ -127,6 +141,14 @@
                     minlength: 2,
                     maxlength: 50,
                 },
+                country_code: {
+                    required: true
+                },
+                phone: {
+                    required: true,
+                    minlength: 8,
+                    maxlength: 15,
+                },
                 message: {
                     required: true,
                     minlength: 10,
@@ -150,6 +172,11 @@
                     minlength: "Email must consist of at least 2 characters.",
                     maxlength: "Email must not exceed characters limit 50.",
                 },
+                phone: {
+                    required: "Please enter phone number",
+                    minlength: "Phone must consist of at least 8 characters.",
+                    maxlength: "Phone must not exceed characters limit 15.",
+                },
                 message: {
                     required: "Please enter message",
                     minlength: "Message must consist of at least 10 characters.",
@@ -157,8 +184,13 @@
                 },
             },
             errorPlacement: function(label, element) {
-                label.addClass('fs--1 text-danger');
-                label.insertAfter(element);
+                if (element.parent().hasClass('input-group')) {
+                    label.addClass('fs--1 text-danger');
+                    label.insertAfter(element.parent());
+                } else {
+                    label.addClass('fs--1 text-danger');
+                    label.insertAfter(element);
+                }
             },
             submitHandler: function(form) {
                 var submitButton = $(form).find('button[type="submit"]');

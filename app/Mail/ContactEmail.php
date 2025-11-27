@@ -29,10 +29,13 @@ class ContactEmail extends Mailable
         return new Content(
             view: 'email.contact',
             with: [
+                'type'              => $this->data['type'] ?? 1,
                 'first_name'        => $this->data['first_name'] ?? '',
                 'last_name'         => $this->data['last_name'] ?? '',
                 'email'             => $this->data['email'] ?? '',
-                'text'              => $this->data['message'] ?? ''
+                'text'              => $this->data['message'] ?? '',
+                'country_code'      => $this->data['country_code'] ?? '',
+                'phone'             => $this->data['phone'] ?? '',
             ],
         );
     }

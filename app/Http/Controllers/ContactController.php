@@ -15,7 +15,7 @@ class ContactController extends Controller
     public function index(Request $request): View|JsonResponse
     {
         if ($request->ajax()) {
-            $data = Contact::select('id', 'first_name', 'last_name', 'email', 'message', 'created_at');
+            $data = Contact::select('id', 'first_name', 'last_name', 'email', 'message',  'country_code', 'phone', 'created_at');
             return Datatables::of($data)
                 ->addColumn('full_name', function ($row) {
                     return $row->first_name . ' ' . $row->last_name;
@@ -29,6 +29,9 @@ class ContactController extends Controller
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row['created_at']->format('d M, Y');
+                })
+                ->editColumn('phone', function ($row) {
+                    return trim($row['country_code'] . ' ' . $row['phone']) ?? 'N/A';
                 })
                 ->orderColumn('created_at', function ($query, $order) {
                     $query->orderBy('created_at', $order);

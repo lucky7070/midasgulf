@@ -17,8 +17,9 @@
                         style="width:100%">
                         <thead class="bg-200 text-900">
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
+                                <th>Name</th>
+                                <th></th>
+                                <th>Phone</th>
                                 <th>Email</th>
                                 <th>Message</th>
                                 <th>Submit Date</th>
@@ -42,7 +43,7 @@
         var table = $('.table-datatable').DataTable({
             ajax: "{{ request()->url() }}",
             order: [
-                [4, 'desc']
+                [5, 'desc']
             ],
             columns: [{
                     data: 'full_name',
@@ -52,6 +53,10 @@
                     data: 'last_name',
                     name: 'last_name',
                     visible: false
+                },
+                {
+                    data: 'phone',
+                    name: 'phone',
                 },
                 {
                     data: 'email',

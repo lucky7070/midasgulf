@@ -21,20 +21,34 @@
                     <h3 class="h5 fw-semibold text-dark mb-3">Client Information</h3>
                     <div class="row text-sm">
                         <div class="col-md-6">
-                            <label class="">Name:</label>
+                            <label class="fw-semibold">Name:</label>
                             <span class="fw-medium text-dark ms-2">{{ $data->name }}</span>
                         </div>
                         <div class="col-md-6">
-                            <label class="">Email:</label>
+                            <label class="fw-semibold">Email:</label>
                             <span class="fw-medium text-dark ms-2">{{ $data->email }}</span>
                         </div>
                         <div class="col-md-6">
-                            <label class="">Phone:</label>
-                            <span class="fw-medium text-dark ms-2">{{ $data->phone }}</span>
+                            <label class="fw-semibold">Phone:</label>
+                            <span class="fw-medium text-dark ms-2">{{ $data->country_code.' '.$data->phone }}</span>
                         </div>
                         <div class="col-md-6">
-                            <label class="">Status:</label>
+                            <label class="fw-semibold">Status:</label>
                             <span class="fw-medium text-dark ms-2 text-uppercase">{{ $data->client_status }}</span>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="fw-semibold">From:</label>
+                            <span class="fw-medium text-dark ms-2 text-uppercase">{{ $data->currently_in_country ? 'In UAE' : 'Outside UAE' }}</span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Valid Passport:</label>
+                            <span class="fw-medium text-dark ms-2 text-uppercase">{{ $data->valid_passport  ? 'Yes' : 'No' }}</span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Valid Emirates ID:</label>
+                            <span class="fw-medium text-dark ms-2 text-uppercase">{{ $data->valid_emirates_id ? 'Yes' : 'No' }}</span>
                         </div>
                     </div>
                 </div>

@@ -18,12 +18,13 @@ class FrontController extends Controller
     public function contactUs(Request $request): RedirectResponse
     {
         $data = $request->validate([
+            'type'          => ['required', 'in:1,2'],
             'first_name'    => ['required', 'string', 'min:2', 'max:50'],
             'last_name'     => ['required', 'string', 'min:2', 'max:50'],
             'email'         => ['required', 'string', 'min:2', 'max:50', 'email'],
             'message'       => ['required', 'string', 'min:10', 'max:1000'],
-            'country_code'  => ['nullable', 'string'],
-            'phone'         => ['nullable', 'string', 'min:8', 'max:15'],
+            'country_code'  => ['required', 'string'],
+            'phone'         => ['required', 'string', 'min:8', 'max:15'],
         ], [
             'first_name.required'   => 'The first name field is required.',
             'first_name.string'     => 'The first name must be a string.',
@@ -101,6 +102,7 @@ class FrontController extends Controller
             "civil_case_description"            => ['nullable', 'string', 'max:1000'],
             "currently_in_country"              => ['required', 'integer', 'in:0,1'],
             "valid_passport"                    => ['boolean'],
+            "valid_emirates_id"                 => ['boolean'],
             "creditor"                          => ['required'],
             "client_status"                     => ['required', 'string', 'in:individual,corporate'],
             "timelineRequirement"               => ['required', 'string'],

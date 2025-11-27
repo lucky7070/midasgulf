@@ -14,7 +14,7 @@ class DebtSettlementController extends Controller
     public function index(Request $request): View|JsonResponse
     {
         if ($request->ajax()) {
-            $data = Debt::select('id', 'slug', 'name', 'phone', 'email', 'client_status', 'created_at')->where('type', 1);
+            $data = Debt::select('id', 'slug', 'name', 'phone', 'email', 'country_code', 'client_status', 'created_at')->where('type', 1);
             return Datatables::of($data)
                 ->addColumn('action', function ($row) {
                     $btn = '<a class="btn btn-sm btn-primary" href="' . route('report.debt-settlement-details', $row->slug) . '">Details</a>';
@@ -26,6 +26,9 @@ class DebtSettlementController extends Controller
                     } else {
                         return '<span class="badge text-bg-success">Corporate</span>';
                     }
+                })
+                ->editColumn('phone', function ($row) {
+                    return trim($row['country_code'] . ' ' . $row['phone']) ?? 'N/A';
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row['created_at']->format('d M, Y');

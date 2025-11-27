@@ -12,6 +12,7 @@ class Contact extends Model
     use HasFactory, SoftDeletes, CustomScopes;
 
     protected $fillable = [
+        'type',
         'first_name',
         'last_name',
         'email',

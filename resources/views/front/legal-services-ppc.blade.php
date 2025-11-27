@@ -27,6 +27,7 @@
 
                                     <div class="mb-2">
                                         <input type="text" class="form-control form-control-lg" placeholder="First Name" name="first_name" value="{{ old('first_name') }}">
+                                        <input type="hidden" name="type" value="2">
                                         @error("first_name")
                                         <small class="text-white">{{ $message }}</small>
                                         @enderror
@@ -159,6 +160,11 @@
                     required: "Please enter email",
                     minlength: "Email must consist of at least 2 characters.",
                     maxlength: "Email must not exceed characters limit 50.",
+                },
+                phone: {
+                    required: "Please enter phone number",
+                    minlength: "Phone must consist of at least 8 characters.",
+                    maxlength: "Phone must not exceed characters limit 15.",
                 },
                 message: {
                     required: "Please enter message",

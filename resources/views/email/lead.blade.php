@@ -94,8 +94,7 @@
         </div>
 
         <div class="lead-info">
-            <h2 style="color: #2c3e50; margin-top: 0;">Lead Details</h2>
-
+            <h2 style="color: #2c3e50; margin-top: 0;">{{ $type == 2 ? 'Debt Restructuring' : 'Debt Settlement' }} Lead Details</h2>
             <table class="table">
                 <tr>
                     <th>Full Name</th>

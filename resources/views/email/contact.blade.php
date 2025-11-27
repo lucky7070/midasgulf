@@ -94,7 +94,7 @@
         </div>
 
         <div class="lead-info">
-            <h2 style="color: #2c3e50; margin-top: 0;">Lead Details</h2>
+            <h2 style="color: #2c3e50; margin-top: 0;">{{ $type == 2 ? 'Book Your Free Consultation' : 'Contact Us' }} Lead Details</h2>
 
             <table class="table">
                 <tr>
@@ -104,6 +104,10 @@
                 <tr>
                     <th>Email</th>
                     <td>{{ $email }}</td>
+                </tr>
+                <tr>
+                    <th>Phone</th>
+                    <td>{{ $country_code.' '.$phone }}</td>
                 </tr>
                 @if(!empty($text))
                 <tr>

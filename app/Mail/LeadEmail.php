@@ -34,6 +34,7 @@ class LeadEmail extends Mailable
                 'country_code'  => $this->data['country_code'] ?? '',
                 'phone'         => $this->data['phone'] ?? '',
                 'email'         => $this->data['email'] ?? '',
+                'type'          => $this->data['type'] ?? 1,
                 'details'       => route($this->data['type'] == 2 ? 'report.debt-restructuring-details' : 'report.debt-settlement-details', $this->data['slug']),
             ],
         );

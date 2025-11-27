@@ -25,6 +25,7 @@ class Debt extends Model
         'civil_case_description',
         'currently_in_country',
         'valid_passport',
+        'valid_emirates_id',
         'client_status',
         'timelineRequirement',
         'settlement_upload_emirates_front',
