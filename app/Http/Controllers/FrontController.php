@@ -22,8 +22,8 @@ class FrontController extends Controller
             'last_name'     => ['required', 'string', 'min:2', 'max:50'],
             'email'         => ['required', 'string', 'min:2', 'max:50', 'email'],
             'message'       => ['required', 'string', 'min:10', 'max:1000'],
-            'country_code'  => ['required', 'string'],
-            'phone'         => ['required', 'string', 'min:8', 'max:15'],
+            'country_code'  => ['nullable', 'string'],
+            'phone'         => ['nullable', 'string', 'min:8', 'max:15'],
         ], [
             'first_name.required'   => 'The first name field is required.',
             'first_name.string'     => 'The first name must be a string.',
