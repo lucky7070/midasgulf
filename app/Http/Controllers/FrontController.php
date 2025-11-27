@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Helper\Helper;
 use App\Mail\ContactEmail;
+use App\Mail\LeadEmail;
 use App\Models\Contact;
 use App\Models\Debt;
 use Illuminate\Http\RedirectResponse;
@@ -141,6 +142,11 @@ class FrontController extends Controller
         if ($request->file('settlement_upload_ejari'))          $data['settlement_upload_ejari']            = Helper::saveFile($request->file('settlement_upload_ejari'), 'debt');
 
         $debt = Debt::create($data);
+        try {
+            Mail::send(new LeadEmail($debt));
+        } catch (\Throwable $th) {
+        }
+
         return to_route('checkout', $debt->slug)->withSuccess('Enquiry submitted successfully..!!');
     }
 
