@@ -33,6 +33,7 @@ class Debt extends Model
         'settlement_upload_passport',
         'settlement_upload_license',
         'settlement_upload_ejari',
+        'payment_status',
     ];
 
     protected $casts = [

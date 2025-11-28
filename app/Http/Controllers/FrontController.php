@@ -7,6 +7,7 @@ use App\Mail\ContactEmail;
 use App\Mail\LeadEmail;
 use App\Models\Contact;
 use App\Models\Debt;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -160,5 +161,15 @@ class FrontController extends Controller
         if (!$data) return to_route('home')->withError('Invalid url..!!');
 
         return view('front.checkout', compact('data'));
+    }
+
+    public function payment(Request $request): JsonResponse
+    {
+        Debt::where('slug', $request->token)->update(['payment_status' => 1]);
+        return response()->json([
+            'status'    => true,
+            'message'   => 'Payment update Successfully',
+            'data'      => ''
+        ]);
     }
 }

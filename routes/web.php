@@ -32,6 +32,7 @@ Route::view('/debt-restructuring', 'front.debt-restructuring')->name('debt-restr
 Route::post('/debt-restructuring', [FrontController::class, 'debtRestructuring'])->name('debt-restructuring');
 
 Route::get('checkout/{slug}', [FrontController::class, 'checkout'])->name('checkout');
+Route::post('payment', [FrontController::class, 'payment'])->name('payment');
 
 Route::view('/contact', 'front.contact')->name('contact');
 Route::post('/contact', [FrontController::class, 'contactUs'])->name('contact');

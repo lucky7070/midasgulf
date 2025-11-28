@@ -50,6 +50,10 @@
                             <label class="fw-semibold">Valid Emirates ID:</label>
                             <span class="fw-medium text-dark ms-2 text-uppercase">{{ $data->valid_emirates_id ? 'Yes' : 'No' }}</span>
                         </div>
+                        <div class="col-md-6">
+                            <label class="fw-semibold">Request for Book Consultation:</label>
+                            <span class="fw-medium text-dark ms-2 text-uppercase">{{ $data->payment_status ? 'Yes' : 'No' }}</span>
+                        </div>
                     </div>
                 </div>
 
